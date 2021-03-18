@@ -131,13 +131,13 @@ export default class WelcomeScreen extends React.Component {
       <View style={styles.container}>
         <Image
           style={styles.logo}
-          source={require("../../../SpeedieBackground.jpg")}
+          source={require("../../../Speedie Logo.webp")}
         ></Image>
-        <Text style={styles.loginHeader}>Speedie Login</Text>
+        <Text style={styles.loginHeader}>Welcome to Speedie Bean!</Text>
         <View style={styles.EmailInputView}>
           <TextInput
             style={styles.inputText}
-            placeholder="Email..."
+            placeholder="Email"
             placeholderTextColor="#003f5c"
             onChangeText={(text) => this.setState({ email: text })}
             onSubmitEditing={this._handlePress}
@@ -147,7 +147,7 @@ export default class WelcomeScreen extends React.Component {
           <TextInput
             secureTextEntry
             style={styles.inputText}
-            placeholder="Password..."
+            placeholder="Password"
             placeholderTextColor="#003f5c"
             onChangeText={(text) => this.setState({ password: text })}
             onSubmitEditing={this._handlePress}
@@ -163,43 +163,33 @@ export default class WelcomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
+  // background: {
+  //   flex: 1,
+  // },
   container: {
-    flex: 1,
-    backgroundColor: "#093b15",
-    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    alignItems: "flex-start",
     justifyContent: "center",
   },
   logo: {
-    width: "50%",
-    height: "100%",
+    width: "18%",
+    height: "18%",
     alignSelf: "flex-start",
-    justifyContent: "center",
+    justifyContent: "start",
   },
   loginHeader: {
-    fontSize: 45,
+    fontSize: 20,
     fontWeight: "bold",
-    color: "white",
-    position: "absolute",
-    top: 210,
-    right: 200,
+    color: "black",
+    position: "relative",
   },
   EmailInputView: {
     width: "35%",
     backgroundColor: "#9abadd",
     borderRadius: 25,
     height: 50,
-    marginBottom: 20,
-    position: "absolute",
-    top: 300,
-    right: 80,
-    //marginTop: 60,
-    //justifyContent: "center",
-    alignItems: "flex-start",
-
-    alignSelf: "flex-end",
+    marginTop: 20,
+    alignSelf: "center",
     padding: 20,
   },
 
@@ -208,15 +198,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#99badd",
     borderRadius: 25,
     height: 50,
-    marginBottom: 20,
-    position: "absolute",
-    top: 375,
-    right: 80,
+    marginTop: 20,
+    position: "relative",
+    top: 0,
+    right: 0,
     //marginTop: 60,
     //justifyContent: "center",
-    alignItems: "flex-start",
+    // alignItems: "flex-start",
 
-    alignSelf: "flex-end",
+    alignSelf: "center",
     padding: 20,
   },
   inputText: {
@@ -225,34 +215,30 @@ const styles = StyleSheet.create({
     color: "black",
   },
   forgot: {
-    color: "white",
+    color: "black",
     fontSize: 11,
-    position: "absolute",
-    //alignSelf: "flex-end",
-    top: 530,
-    right: 60,
+    position: "relative",
+    alignSelf: "center",
   },
   loginBtn: {
     width: "35%",
-    backgroundColor: "#fb5b5a",
+    backgroundColor: "#113B08",
     borderRadius: 25,
     height: 50,
     //alignItems: "center",
     //justifyContent: "center",
-    //alignSelf: "flex-end",
-    position: "absolute",
+    alignSelf: "center",
+    position: "relative",
     marginTop: 40,
     marginBottom: 10,
-    right: 80,
-    top: 440,
   },
   loginText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
-    position: "absolute",
-    right: 240,
-    top: 12,
+    position: "relative",
+    right: 0,
+    top: 15,
   },
 });
