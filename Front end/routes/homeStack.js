@@ -14,27 +14,52 @@ import ChiOrders from "../app/assets/Screens- Front end/ChiOrders";
 const screens = {
   Login: {
     screen: Login,
+    navigationOptions: {
+      header: null,
+    }
+    
   },
   AllOrders: {
     screen: AllOrders,
+    navigationOptions: {
+      header: null,
+    }
   },
   MiaOrders: {
     screen: MiaOrders,
+    navigationOptions: {
+      header: null,
+    }
   },
   NolaOrders: {
     screen: NolaOrders,
+    navigationOptions: {
+      header: null,
+    }
   },
   ChiOrders: {
     screen: ChiOrders,
+    navigationOptions: {
+      header: null,
+    }
   },
   NewOrder: {
     screen: NewOrder,
+    navigationOptions: {
+      header: null,
+    }
   },
   MiaNewOrders: {
     screen: MiaOrders,
+    navigationOptions: {
+      header: null,
+    }
   },
   Inventory: {
     screen: Inventory,
+    navigationOptions: {
+      header: null,
+    }
   },
   
 };

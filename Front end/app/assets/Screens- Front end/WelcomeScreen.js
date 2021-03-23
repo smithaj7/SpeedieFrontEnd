@@ -129,10 +129,8 @@ export default class WelcomeScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Image
-          style={styles.logo}
-          source={require("../../../Speedie Logo.webp")}
-        ></Image>
+        <View style = {styles.banner}>
+        </View>
         <Text style={styles.loginHeader}>Welcome to Speedie Bean!</Text>
         <View style={styles.EmailInputView}>
           <TextInput
@@ -171,17 +169,26 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "center",
   },
+  banner:{
+    width: "35%",
+    height: 50,
+    alignSelf: "center",
+    backgroundColor: "#113B08",
+
+  },
   logo: {
     width: "18%",
     height: "18%",
-    alignSelf: "flex-start",
-    justifyContent: "start",
+    position: "relative",
+    alignSelf: "center",
   },
   loginHeader: {
     fontSize: 20,
     fontWeight: "bold",
     color: "black",
     position: "relative",
+    alignSelf: "center",
+    paddingTop: 20,
   },
   EmailInputView: {
     width: "35%",
