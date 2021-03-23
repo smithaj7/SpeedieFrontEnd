@@ -16,14 +16,13 @@ export default class WelcomeScreen extends React.Component {
     this.state = {
       email: "",
       password: "",
+      confirmPassword: "",
       isLoading: true,
       dataSource: [],
       loggedIn: false,
     };
 
     this._handlePress = this._handlePress.bind(this);
-    this._handleForgotPress = this._handleForgotPress.bind(this);
-
     //this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
 
@@ -81,46 +80,45 @@ export default class WelcomeScreen extends React.Component {
   };
 
   _handlePress = async () => {
-    const result = await this.getData();
-    //var li
-    var li = this.state.dataSource.map((val, key) => {
-      return val.LoggedIn;
-    });
-
-    var location = this.state.dataSource.map((val, key) => {
-      return val.Location;
-    });
-
-    console.log(li[0]);
-    console.log(this.state.email);
-    console.log(this.state.password);
-
-    if (li[0] == "Yes") {
-      console.log("hey");
-      this.setState(
-        {
-          loggedIn: true,
-        },
-        () => console.log(this.state.loggedIn)
-      );
-      if (location == "All") {
-        this.props.navigation.navigate("AllOrders");
-      } else if (location == "Miami") {
-        var userName = this.state.email;
-        this.props.navigation.navigate("MiaOrders", { user: userName });
-      } else if (location == "New Orleans") {
-        this.props.navigation.navigate("NolaOrders");
-      } else if (location == "Chicago") {
-        this.props.navigation.navigate("ChiOrders");
+      if (this.state.password != this.state.confirmPassword){
+        alert("Invalid username or password");
       }
-    } else {
-      alert("Invalid username or password");
-    }
-  };
+    // const result = await this.getData();
+    // //var li
+    // var li = this.state.dataSource.map((val, key) => {
+    //   return val.LoggedIn;
+    // });
 
-  _handleForgotPress(){
-    this.props.navigation.navigate("ForgotPassword");
-  }
+    // var location = this.state.dataSource.map((val, key) => {
+    //   return val.Location;
+    // });
+
+    // console.log(li[0]);
+    // console.log(this.state.email);
+    // console.log(this.state.password);
+
+    // if (li[0] == "Yes") {
+    //   console.log("hey");
+    //   this.setState(
+    //     {
+    //       loggedIn: true,
+    //     },
+    //     () => console.log(this.state.loggedIn)
+    //   );
+    //   if (location == "All") {
+    //     this.props.navigation.navigate("AllOrders");
+    //   } else if (location == "Miami") {
+    //     var userName = this.state.email;
+    //     this.props.navigation.navigate("MiaOrders", { user: userName });
+    //   } else if (location == "New Orleans") {
+    //     this.props.navigation.navigate("NolaOrders");
+    //   } else if (location == "Chicago") {
+    //     this.props.navigation.navigate("ChiOrders");
+    //   }
+    // } else {
+    //   alert("Invalid username or password");
+    // }
+  };
 
   render() {
     // var li = [];
@@ -138,7 +136,7 @@ export default class WelcomeScreen extends React.Component {
         <View style = {styles.banner}>
           <Text style={styles.bannerText}>Speedie Bean</Text>
         </View>
-        <Text style={styles.loginHeader}>Welcome to Speedie Bean!</Text>
+        <Text style={styles.loginHeader}>Reset Password</Text>
         <View style={styles.EmailInputView}>
           <TextInput
             style={styles.inputText}
@@ -152,18 +150,26 @@ export default class WelcomeScreen extends React.Component {
           <TextInput
             secureTextEntry
             style={styles.inputText}
-            placeholder="Password"
+            placeholder="New Password"
             placeholderTextColor="#003f5c"
             onChangeText={(text) => this.setState({ password: text })}
             onSubmitEditing={this._handlePress}
           />
         </View>
-        <TouchableOpacity style={styles.touchableText} onPress={this._handleForgotPress}>
-        <Text style={styles.forgotText}>Forgot Password?</Text>
-        </TouchableOpacity>
+
+        <View style={styles.ConfirmPasswordInputView}>
+          <TextInput
+            secureTextEntry
+            style={styles.inputText}
+            placeholder="Confirm Password"
+            placeholderTextColor="#003f5c"
+            onChangeText={(text) => this.setState({ confirmPassword: text })}
+            onSubmitEditing={this._handlePress}
+          />
+        </View>
 
         <TouchableOpacity style={styles.loginBtn} onPress={this._handlePress}>
-          <Text style={styles.loginText}>LOGIN</Text>
+          <Text style={styles.loginText}>Reset</Text>
         </TouchableOpacity>
       </View>
     );
@@ -223,6 +229,25 @@ const styles = StyleSheet.create({
   },
 
   PasswordInputView: {
+    width: "35%",
+    backgroundColor: "white",
+    borderWidth: 1.5,
+    borderColor: "black",
+    borderRadius: 15,
+    height: 50,
+    marginTop: 20,
+    position: "relative",
+    top: 0,
+    right: 0,
+    //marginTop: 60,
+    //justifyContent: "center",
+    // alignItems: "flex-start",
+
+    alignSelf: "center",
+    padding: 20,
+  },
+
+  ConfirmPasswordInputView: {
     width: "35%",
     backgroundColor: "white",
     borderWidth: 1.5,

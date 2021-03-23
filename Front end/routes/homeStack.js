@@ -2,6 +2,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 //import Login from "../app/assets/Screens/WelcomeScreen";
 import Login from "../app/assets/Screens- Front end/WelcomeScreen";
+import ForgotPassword from "../app/assets/Screens- Front end/ForgotPassword";
 import AllOrders from "../app/assets/Screens- Front end/AllOrders";
 import NewOrder from "../app/assets/Screens- Front end/NewOrder";
 import Inventory from "../app/assets/Screens- Front end/Inventory";
@@ -14,6 +15,14 @@ import ChiOrders from "../app/assets/Screens- Front end/ChiOrders";
 const screens = {
   Login: {
     screen: Login,
+    navigationOptions: {
+      header: null,
+    }
+    
+  },
+
+  ForgotPassword: {
+    screen: ForgotPassword,
     navigationOptions: {
       header: null,
     }
