@@ -152,6 +152,9 @@ export default class WelcomeScreen extends React.Component {
             onSubmitEditing={this._handlePress}
           />
         </View>
+        <TouchableOpacity style={styles.touchableText}>
+        <Text style={styles.forgotText}>Forgot Password?</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity style={styles.loginBtn} onPress={this._handlePress}>
           <Text style={styles.loginText}>LOGIN</Text>
@@ -236,11 +239,22 @@ const styles = StyleSheet.create({
     width: "80%",
     color: "black",
   },
-  forgot: {
-    color: "black",
-    fontSize: 11,
+  forgotText: {
+    color: "blue",
+    fontSize: 17,
+    alignSelf: "center",
+  },
+  touchableText: {
+    backgroundColor: "white",
+    height: 50,
+    width: "10%",
+    right: 190,
     position: "relative",
     alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 8,
+
   },
   loginBtn: {
     width: "13%",
@@ -252,7 +266,7 @@ const styles = StyleSheet.create({
     //justifyContent: "center",
     alignSelf: "center",
     position: "relative",
-    marginTop: 60,
+    marginTop: 50,
     marginBottom: 10,
   },
   loginText: {
