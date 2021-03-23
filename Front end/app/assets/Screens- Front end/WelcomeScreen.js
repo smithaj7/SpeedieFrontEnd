@@ -130,6 +130,7 @@ export default class WelcomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style = {styles.banner}>
+          <Text style={styles.bannerText}>Speedie Bean</Text>
         </View>
         <Text style={styles.loginHeader}>Welcome to Speedie Bean!</Text>
         <View style={styles.EmailInputView}>
@@ -172,9 +173,19 @@ const styles = StyleSheet.create({
   banner:{
     width: "35%",
     height: 50,
+    //flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     alignSelf: "center",
     backgroundColor: "#113B08",
 
+  },
+  bannerText:{
+    fontSize: 26,
+    fontWeight: "bold",
+    color: "white",
+    //alignSelf: "center",
+    //alignItems: "center",
   },
   logo: {
     width: "18%",
@@ -192,8 +203,10 @@ const styles = StyleSheet.create({
   },
   EmailInputView: {
     width: "35%",
-    backgroundColor: "#9abadd",
-    borderRadius: 25,
+    backgroundColor: "white",
+    borderWidth: 1.5,
+    borderColor: "black",
+    borderRadius: 15,
     height: 50,
     marginTop: 20,
     alignSelf: "center",
@@ -202,8 +215,10 @@ const styles = StyleSheet.create({
 
   PasswordInputView: {
     width: "35%",
-    backgroundColor: "#99badd",
-    borderRadius: 25,
+    backgroundColor: "white",
+    borderWidth: 1.5,
+    borderColor: "black",
+    borderRadius: 15,
     height: 50,
     marginTop: 20,
     position: "relative",
@@ -228,15 +243,16 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   loginBtn: {
-    width: "35%",
+    width: "13%",
     backgroundColor: "#113B08",
-    borderRadius: 25,
+    borderRadius: 10,
     height: 50,
+    right: 160,
     //alignItems: "center",
     //justifyContent: "center",
     alignSelf: "center",
     position: "relative",
-    marginTop: 40,
+    marginTop: 60,
     marginBottom: 10,
   },
   loginText: {
