@@ -45,6 +45,7 @@ export default class MiaOrders extends React.Component {
     this.refreshScreen = this.refreshScreen.bind(this);
     this.archivedPressHandler = this.archivedPressHandler.bind(this);
     this.addOrderPressHandler = this.addOrderPressHandler.bind(this);
+    this._handleAccountPress = this._handleAccountPress.bind(this);
   }
 
   componentDidMount() {
@@ -136,6 +137,10 @@ export default class MiaOrders extends React.Component {
     return this.getData();
   };
 
+  _handleAccountPress(){
+    this.props.navigation.push("AccountInfo");
+  }
+
   inventoryPressHandler() {
     this.props.navigation.push("Inventory");
   }
@@ -143,6 +148,7 @@ export default class MiaOrders extends React.Component {
   refreshScreen = () => {
     this.getData();
   };
+
 
   fillOrder(i, orderStatus) {
     const { params } = this.props.navigation.state;
@@ -459,7 +465,7 @@ export default class MiaOrders extends React.Component {
             <Text style={styles.menuText}>Inventory</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.rightButton}>
-            <Text style={styles.menuText}>Account</Text>
+            <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
             </TouchableOpacity>
           </View>
           {/* <TextInput

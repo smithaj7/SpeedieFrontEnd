@@ -11,6 +11,7 @@ import Inventory from "../app/assets/Screens- Front end/Inventory";
 import MiaOrders from "../app/assets/Screens- Front end/MiaOrders";
 import NolaOrders from "../app/assets/Screens- Front end/NolaOrders";
 import ChiOrders from "../app/assets/Screens- Front end/ChiOrders";
+import AccountInfo from "../app/assets/Screens- Front end/AccountInfo"
 
 const screens = {
   Login: {
@@ -66,6 +67,13 @@ const screens = {
   },
   Inventory: {
     screen: Inventory,
+    navigationOptions: {
+      header: null,
+    }
+  },
+
+  AccountInfo: {
+    screen: AccountInfo,
     navigationOptions: {
       header: null,
     }
