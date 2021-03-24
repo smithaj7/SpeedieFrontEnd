@@ -81,10 +81,20 @@ export default class WelcomeScreen extends React.Component {
 
   _handlePress = async () => {
       if (this.state.password != this.state.confirmPassword){
-        alert("Invalid username or password");
+        alert("Passwords do not match");
       }
       else{
-        await this.getData();
+        const result = await this.getData();
+    //var li
+        var li = this.state.dataSource.map((val, key) => {
+        return val.ResetStatus;
+    });
+        if (li == "invalid email"){
+            alert("Invalid email");
+        }
+        else{
+            this.props.navigation.navigate("Login");
+        }
       }
     
     // //var li
