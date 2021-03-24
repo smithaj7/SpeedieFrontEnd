@@ -136,9 +136,10 @@ export default class WelcomeScreen extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <View style = {styles.banner}>
-          <Text style={styles.bannerText}>Speedie Bean</Text>
+          <Text style={styles.bannerText}>Speedie Login</Text>
         </View>
-        <Text style={styles.loginHeader}>Welcome to Speedie Bean!</Text>
+        <Image style = {styles.logo} source={require("../../../SpeediePNG.png")}></Image>
+        {/* <Text style={styles.loginHeader}>Welcome to Speedie Bean!</Text> */}
         <View style={styles.EmailInputView}>
           <TextInput
             style={styles.inputText}
@@ -181,7 +182,7 @@ const styles = StyleSheet.create({
   },
   banner:{
     width: "90%",
-    height: "13%",
+    height: "10%",
     //flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -197,10 +198,11 @@ const styles = StyleSheet.create({
     //alignItems: "center",
   },
   logo: {
-    width: "18%",
-    height: "18%",
+    width: "55%",
+    height: "30%",
     position: "relative",
     alignSelf: "center",
+    paddingTop: 20
   },
   loginHeader: {
     fontSize: 20,
@@ -217,7 +219,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderRadius: 15,
     height: "13%",
-    marginTop: 20,
+    marginTop: 15,
     alignSelf: "center",
     padding: 20,
   },
@@ -241,8 +243,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   inputText: {
-    height: 70,
-    width: "80%",
+    height: "90%",
+    fontSize: 18,
+    width: "85%",
     color: "black",
   },
   forgotText: {
