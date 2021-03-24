@@ -264,8 +264,8 @@ export default class MiaOrders extends React.Component {
       return (
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={styles.text}>Speedie Bean Associate Portal</Text>
-            <TouchableOpacity
+            <Text style={styles.text}>Miami Orders</Text>
+            {/* <TouchableOpacity
               style={styles.touch}
               onPress={this.newOrderPressHandler}
               activeOpacity={0.5}
@@ -278,7 +278,7 @@ export default class MiaOrders extends React.Component {
               activeOpacity={0.5}
             >
               <Text style={styles.InventoryBtn}>Inventory</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             {/* <TouchableOpacity
               style={styles.archivedButton}
               onPress={this.archivedPressHandler}
@@ -287,10 +287,9 @@ export default class MiaOrders extends React.Component {
               <Text style={styles.InventoryBtn}>Archived</Text>
             </TouchableOpacity>  */}
           </View>
-          <Text style={styles.orderHeader}>Miami Orders</Text>
           <Searchbar
             placeholder="Search"
-            style={{ width: "40%" }}
+            style={styles.searchBar}
             onChangeText={(text) => this.onChangeSearch(text)}
           ></Searchbar>
           <RadioButton
@@ -308,17 +307,20 @@ export default class MiaOrders extends React.Component {
 
           <ScrollView
             style={{
-              width: "80%",
+              width: "90%",
               height: "70%",
-              position: "absolute",
-              top: 250,
-              right: 200,
+              position: "relative",
+              alignSelf: "center",
+              //top: 250,
+              //right: 200,
             }}
           >
             <DataTable
               style={{
-                //width: "80%",
-                //position: "absolute",
+                width: "100%",
+                position: "relative",
+                alignSelf: "center",
+                marginTop: 10,
                 //top: 150,
                 //right: 200,
                 flex: 1,
@@ -537,14 +539,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   header: {
-    height: "7%",
-    width: "100%",
+    height: "10%",
+    width: "90%",
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#093b15",
   },
   phoneText: {
     color: "black",
     fontSize: 14,
     paddingTop: 10,
+  },
+  searchBar: {
+    position: "relative",
+    marginTop: 10,
+    width: "40%",
+    alignSelf: "flex-start",
+    left: 70
   },
   newOrderStyle: {
     width: 130,
@@ -591,11 +604,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: 18,
+    fontSize: 35,
     fontWeight: "bold",
-    position: "absolute",
-    top: 16,
-    left: 5,
+    //position: "absolute",
+    //top: 16,
+    //left: 5,
   },
   textInput: {
     height: 40,
@@ -697,6 +710,10 @@ const styles = StyleSheet.create({
     left: 850,
   },
   orderHeader: {
+    position: "relative",
+    marginTop: 5,
+    alignSelf: "flex-start",
+    left: 20,
     fontWeight: "bold",
     fontSize: 20,
     color: "#093b15",

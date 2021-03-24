@@ -128,10 +128,12 @@ export default class WelcomeScreen extends React.Component {
         </View>
         <DataTable
           style={{
-            width: "80%",
-            position: "absolute",
-            top: 100,
-            right: 200,
+            width: "90%",
+            marginTop: 10,
+            position: "relative",
+            alignSelf: "center",
+            //top: 100,
+            //right: 200,
             borderRadius: 10,
             borderColor: "black",
             borderWidth: 1,
