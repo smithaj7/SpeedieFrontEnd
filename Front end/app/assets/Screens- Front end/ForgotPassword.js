@@ -59,7 +59,7 @@ export default class WelcomeScreen extends React.Component {
   }
 
   getData = async () => {
-    return await fetch("http://localhost:7071/api/Login", {
+    return await fetch("http://localhost:7071/api/ForgotPassword", {
       method: "POST",
       body: JSON.stringify({
         email: this.state.email,
@@ -83,7 +83,10 @@ export default class WelcomeScreen extends React.Component {
       if (this.state.password != this.state.confirmPassword){
         alert("Invalid username or password");
       }
-    // const result = await this.getData();
+      else{
+        await this.getData();
+      }
+    
     // //var li
     // var li = this.state.dataSource.map((val, key) => {
     //   return val.LoggedIn;
@@ -186,8 +189,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   banner:{
-    width: "35%",
-    height: 50,
+    width: "90%",
+    height: "13%",
     //flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -217,24 +220,24 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   EmailInputView: {
-    width: "35%",
+    width: "90%",
     backgroundColor: "white",
     borderWidth: 1.5,
     borderColor: "black",
     borderRadius: 15,
-    height: 50,
+    height: "13%",
     marginTop: 20,
     alignSelf: "center",
     padding: 20,
   },
 
   PasswordInputView: {
-    width: "35%",
+    width: "90%",
     backgroundColor: "white",
     borderWidth: 1.5,
     borderColor: "black",
     borderRadius: 15,
-    height: 50,
+    height: "13%",
     marginTop: 20,
     position: "relative",
     top: 0,
@@ -248,12 +251,12 @@ const styles = StyleSheet.create({
   },
 
   ConfirmPasswordInputView: {
-    width: "35%",
+    width: "90%",
     backgroundColor: "white",
     borderWidth: 1.5,
     borderColor: "black",
     borderRadius: 15,
-    height: 50,
+    height: "13%",
     marginTop: 20,
     position: "relative",
     top: 0,
@@ -288,14 +291,15 @@ const styles = StyleSheet.create({
 
   },
   loginBtn: {
-    width: "13%",
+    width: "35%%",
     backgroundColor: "#113B08",
     borderRadius: 10,
     height: 50,
     right: 160,
     //alignItems: "center",
     //justifyContent: "center",
-    alignSelf: "center",
+    alignSelf: "flex-start",
+    left: 20,
     position: "relative",
     marginTop: 50,
     marginBottom: 10,

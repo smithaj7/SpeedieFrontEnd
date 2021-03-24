@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 
-import navigation from "react-navigation";
+import {navigation, SafeAreaView} from "react-navigation";
 
 export default class WelcomeScreen extends React.Component {
   constructor(props) {
@@ -134,7 +134,7 @@ export default class WelcomeScreen extends React.Component {
     // }
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style = {styles.banner}>
           <Text style={styles.bannerText}>Speedie Bean</Text>
         </View>
@@ -165,7 +165,7 @@ export default class WelcomeScreen extends React.Component {
         <TouchableOpacity style={styles.loginBtn} onPress={this._handlePress}>
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -180,8 +180,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   banner:{
-    width: "35%",
-    height: 50,
+    width: "90%",
+    height: "13%",
     //flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -211,24 +211,24 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   EmailInputView: {
-    width: "35%",
+    width: "90%",
     backgroundColor: "white",
     borderWidth: 1.5,
     borderColor: "black",
     borderRadius: 15,
-    height: 50,
+    height: "13%",
     marginTop: 20,
     alignSelf: "center",
     padding: 20,
   },
 
   PasswordInputView: {
-    width: "35%",
+    width: "90%",
     backgroundColor: "white",
     borderWidth: 1.5,
     borderColor: "black",
     borderRadius: 15,
-    height: 50,
+    height: "13%",
     marginTop: 20,
     position: "relative",
     top: 0,
@@ -253,24 +253,24 @@ const styles = StyleSheet.create({
   touchableText: {
     backgroundColor: "white",
     height: 50,
-    width: "10%",
-    right: 190,
+    width: "35%",
+    left: 20,
     position: "relative",
-    alignSelf: "center",
+    alignSelf: "flex-start",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 8,
 
   },
   loginBtn: {
-    width: "13%",
+    width: "35%",
     backgroundColor: "#113B08",
     borderRadius: 10,
     height: 50,
-    right: 160,
+    left: 20,
     //alignItems: "center",
     //justifyContent: "center",
-    alignSelf: "center",
+    alignSelf: "flex-start",
     position: "relative",
     marginTop: 50,
     marginBottom: 10,
