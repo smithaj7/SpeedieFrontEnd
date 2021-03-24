@@ -451,6 +451,17 @@ export default class MiaOrders extends React.Component {
             </TouchableOpacity>
             <Text style={styles.plusSign}>+</Text>
           </ScrollView>
+          <View style={styles.menuView}>
+            <TouchableOpacity style={styles.leftButton}>
+              <Text style={styles.menuText}>Orders</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.middleButton}>
+            <Text style={styles.menuText}>Inventory</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.rightButton}>
+            <Text style={styles.menuText}>Account</Text>
+            </TouchableOpacity>
+          </View>
           {/* <TextInput
             style={styles.newOrderStyle}
             placeholder="Name..."
@@ -749,4 +760,51 @@ const styles = StyleSheet.create({
     top: 13,
     right: 9,
   },
+  menuView: {
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: 20,
+    height: "10%",
+    width: "90%",
+    backgroundColor: "#093b15"
+  },
+  leftButton: {
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent:"center",
+    //backgroundColor: "yellow",
+    flex: 1,
+    height: "100%",
+    //width: "20%",
+    //height: "100%", 
+  },
+  middleButton: {
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    //backgroundColor: "yellow",
+    //width: "20%",
+    //height: "100%", 
+    flex: 1,
+    height: "100%",
+  },
+  rightButton: {
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    //backgroundColor: "yellow",
+    //width: "20%",
+    //height: "100%", 
+    flex: 1,
+    height: "100%",
+
+  },
+  menuText: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "white"
+  }
 });
