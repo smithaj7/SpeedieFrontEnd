@@ -135,11 +135,11 @@ export default class WelcomeScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <View style = {styles.banner}>
+        {/* <View style = {styles.banner}>
           <Text style={styles.bannerText}>Speedie Login</Text>
-        </View>
+        </View> */}
         <Image style = {styles.logo} source={require("../../../SpeediePNG.png")}></Image>
-        {/* <Text style={styles.loginHeader}>Welcome to Speedie Bean!</Text> */}
+        <Text style={styles.loginHeader}>Login to Speedie Bean below:</Text>
         <View style={styles.EmailInputView}>
           <TextInput
             style={styles.inputText}
@@ -178,39 +178,42 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFFFFF",
     alignItems: "flex-start",
-    justifyContent: "center",
+    // justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
-  banner:{
-    width: "90%",
-    height: "10%",
-    //flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    backgroundColor: "#113B08",
+  // banner:{
+  //   width: "90%",
+  //   height: "10%",
+  //   //flex: 1,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   alignSelf: "center",
+  //   backgroundColor: "#113B08",
 
-  },
-  bannerText:{
-    fontSize: 26,
-    fontWeight: "bold",
-    color: "white",
-    //alignSelf: "center",
-    //alignItems: "center",
-  },
+  // },
+  // bannerText:{
+  //   fontSize: 26,
+  //   fontWeight: "bold",
+  //   color: "white",
+  //   //alignSelf: "flex-start",
+  //   //alignItems: "center",
+  // },
   logo: {
-    width: "55%",
-    height: "30%",
+    width: "60%",
+    height: "25%",
     position: "relative",
     alignSelf: "center",
-    paddingTop: 20
+    marginTop: "7%"
   },
   loginHeader: {
     fontSize: 20,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     color: "black",
     position: "relative",
-    alignSelf: "center",
-    paddingTop: 20,
+    // alignSelf: "center",
+    left: "7%",
+    // paddingTop: 20,
   },
   EmailInputView: {
     width: "90%",
@@ -218,29 +221,22 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: "black",
     borderRadius: 15,
-    height: "13%",
-    marginTop: 15,
+    height: "10%",
+    marginTop: "4%",
     alignSelf: "center",
-    padding: 20,
+    padding: "5%",
   },
-
   PasswordInputView: {
     width: "90%",
     backgroundColor: "white",
     borderWidth: 1.5,
     borderColor: "black",
     borderRadius: 15,
-    height: "13%",
-    marginTop: 20,
+    height: "10%",
+    marginTop: "4%",
     position: "relative",
-    top: 0,
-    right: 0,
-    //marginTop: 60,
-    //justifyContent: "center",
-    // alignItems: "flex-start",
-
     alignSelf: "center",
-    padding: 20,
+    padding: "5%",
   },
   inputText: {
     height: "90%",
@@ -255,28 +251,27 @@ const styles = StyleSheet.create({
   },
   touchableText: {
     backgroundColor: "white",
-    height: 50,
+    height: "5%",
     width: "35%",
-    left: 20,
+    left: "5%",
     position: "relative",
     alignSelf: "flex-start",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 8,
-
+    marginTop: "3%",
   },
   loginBtn: {
     width: "35%",
     backgroundColor: "#113B08",
     borderRadius: 10,
-    height: 50,
-    left: 20,
+    height: "8%",
+    //left: 20,
     //alignItems: "center",
     //justifyContent: "center",
-    alignSelf: "flex-start",
+    alignSelf: "center",
     position: "relative",
-    marginTop: 50,
-    marginBottom: 10,
+    marginTop: "8%",
+    marginBottom: "1%",
   },
   loginText: {
     color: "white",
@@ -284,7 +279,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     position: "relative",
-    right: 0,
-    top: 15,
+    top: "35%",
   },
 });
