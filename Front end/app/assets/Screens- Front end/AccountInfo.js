@@ -150,19 +150,19 @@ export default class WelcomeScreen extends React.Component {
           <Text style={styles.bannerText}>Account information</Text>
         </View>
         <View style={styles.emailView}>
-            <Text style={styles.textStyle}>Email address:</Text>
+            <Text style={styles.textStyle}>Email address: {this.props.navigation.state.params.user}</Text>
         </View>
         <View style={styles.PasswordView}>
             <Text style={styles.textStyle}>Password:</Text>
         </View>
         <View style={styles.BottlesView}>
             <TouchableOpacity style={styles.changePasswordBtn}>
-                <Text style={{fontSize: 25, color: "blue"}}>Change Password?</Text>
+                <Text style={{fontSize: 15, color: "blue"}}>Change Password?</Text>
             </TouchableOpacity>
             
         </View>
         <View style={styles.BottlesView}>
-            <Text style={styles.textStyle}>Location: </Text>
+            <Text style={styles.textStyle}>Location: {this.props.navigation.state.params.location}</Text>
         </View>
         <View style={styles.BottlesView}>
             <Text style={styles.textStyle}>Role: </Text>
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   changePasswordBtn : {
-      width: "15%",
+      width: "40%",
       //backgroundColor: "yellow"
   },
   BottlesView: {
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   textStyle: {
-      fontSize: 25,
+      fontSize: 15,
   },
   inputText: {
     height: "90%",

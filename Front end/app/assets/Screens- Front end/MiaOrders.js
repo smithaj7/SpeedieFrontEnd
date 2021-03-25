@@ -12,6 +12,8 @@ import {
   ScrollView,
 } from "react-native";
 import navigation from "react-navigation";
+
+//import {useRoute} from '@react-navigation/native'
 //import Home from "./WelcomeScreen";
 
 //import { render } from "react-dom";
@@ -22,6 +24,8 @@ const rowsPerPage = 2;
 // const { params } = this.props.navigation.state;
 // var user = params.user;
 // console.log(user);
+
+
 
 export default class MiaOrders extends React.Component {
   constructor(props) {
@@ -138,7 +142,9 @@ export default class MiaOrders extends React.Component {
   };
 
   _handleAccountPress(){
-    this.props.navigation.push("AccountInfo");
+    const { params } = this.props.navigation.state;
+    var email = params.user;
+    this.props.navigation.navigate("AccountInfo", {user: email, location: "Miami"});
   }
 
   inventoryPressHandler() {
@@ -165,7 +171,9 @@ export default class MiaOrders extends React.Component {
   }
 
   render() {
-    //console.log(this.state.userName);
+   //const route = useRoute()
+    //console.log(this.props.navigation.state.params.user);
+    
     if (this.state.isLoading) {
       return (
         <View style={{ flex: 1 }}>
@@ -186,12 +194,12 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "#D3D3D3" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
-                    <DataTable.Cell >{val.deliveryDates[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.names[i]}</DataTable.Cell>
-                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
+                    <DataTable.Cell style={{flex: .5}} >{val.deliveryDates[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell style={{flex: 1}}>{val.names[i]}</DataTable.Cell> */}
+                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>*/}
+                    <DataTable.Cell style={{flex: 1}} >{val.addresses[i]}</DataTable.Cell> 
                     {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
-                    <DataTable.Cell>
+                    <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.editOrder}
                         onPress={this.fillOrder.bind(this, i, "A")}
@@ -205,12 +213,12 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "#D3D3D3" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
-                    <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.names[i]}</DataTable.Cell>
-                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
+                    <DataTable.Cell style={{flex: .5}} >{val.deliveryDates[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell style={{flex: 1}}>{val.names[i]}</DataTable.Cell> */}
+                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>*/}
+                    <DataTable.Cell style={{flex: 1}} >{val.addresses[i]}</DataTable.Cell> 
                     {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
-                    <DataTable.Cell>
+                    <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.reopenOrder}
                         onPress={this.fillOrder.bind(this, i, "I")}
@@ -226,12 +234,12 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "white" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
-                    <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.names[i]}</DataTable.Cell>
-                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
+                    <DataTable.Cell style={{flex: .5}} >{val.deliveryDates[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell style={{flex: 1}}>{val.names[i]}</DataTable.Cell> */}
+                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>*/}
+                    <DataTable.Cell style={{flex: 1}} >{val.addresses[i]}</DataTable.Cell> 
                     {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
-                    <DataTable.Cell>
+                    <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.editOrder}
                         onPress={this.fillOrder.bind(this, i, "A")}
@@ -245,13 +253,12 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "white" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
-                    <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.names[i]}</DataTable.Cell>
-                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
-                    
+                    <DataTable.Cell style={{flex: .5}} >{val.deliveryDates[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell style={{flex: 1}}>{val.names[i]}</DataTable.Cell> */}
+                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>*/}
+                    <DataTable.Cell style={{flex: 1}} >{val.addresses[i]}</DataTable.Cell> 
                     {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
-                    <DataTable.Cell>
+                    <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.reopenOrder}
                         onPress={this.fillOrder.bind(this, i, "I")}
@@ -349,15 +356,15 @@ export default class MiaOrders extends React.Component {
                 style={styles.deliveryDateHeader}>
                   Delivery Date
                 </DataTable.Title>
-                <DataTable.Title style={styles.nameHeader}>
+                {/* <DataTable.Title style={styles.nameHeader}>
                   Name
-                </DataTable.Title>
+                </DataTable.Title> */}
                 {/* <DataTable.Title numeric style={styles.phoneHeader}>
                   Phone
-                </DataTable.Title>
+                </DataTable.Title>*/}
                 <DataTable.Title style={styles.addressHeader}>
                   Address
-                </DataTable.Title> */}
+                </DataTable.Title> 
                 
                 <DataTable.Title style={styles.claimHeader}>
                   Claim
@@ -665,7 +672,7 @@ const styles = StyleSheet.create({
     position: "relative",
     alignSelf: "center",
     alignItems: "center",
-    justifyContent:"center",
+    justifyContent:"flex-start",
     flex: 1
   },
   quantityHeader: {
@@ -689,7 +696,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent:"flex-start",
-    flex: 1
+    flex: .5
   },
 
   claimHeader: {
@@ -697,7 +704,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent:"flex-start",
-    flex: 1
+    flex: .3
   },
   editOrder: {
     backgroundColor: "#9AC6A2",
