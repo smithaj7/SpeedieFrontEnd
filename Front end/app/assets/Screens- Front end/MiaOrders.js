@@ -186,10 +186,10 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "#D3D3D3" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
+                    <DataTable.Cell >{val.deliveryDates[i]}</DataTable.Cell>
                     <DataTable.Cell>{val.names[i]}</DataTable.Cell>
                     {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
                     <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
-                    <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
                     {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
                     <DataTable.Cell>
                       <TouchableOpacity
@@ -205,10 +205,10 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "#D3D3D3" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
+                    <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
                     <DataTable.Cell>{val.names[i]}</DataTable.Cell>
                     {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
                     <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
-                    <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
                     {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
                     <DataTable.Cell>
                       <TouchableOpacity
@@ -226,10 +226,10 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "white" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
+                    <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
                     <DataTable.Cell>{val.names[i]}</DataTable.Cell>
                     {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
                     <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
-                    <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
                     {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
                     <DataTable.Cell>
                       <TouchableOpacity
@@ -245,10 +245,11 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "white" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
+                    <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
                     <DataTable.Cell>{val.names[i]}</DataTable.Cell>
                     {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
                     <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
-                    <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
+                    
                     {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
                     <DataTable.Cell>
                       <TouchableOpacity
@@ -344,6 +345,10 @@ export default class MiaOrders extends React.Component {
                 >
                   OrderID
                 </DataTable.Title> */}
+                <DataTable.Title 
+                style={styles.deliveryDateHeader}>
+                  Delivery Date
+                </DataTable.Title>
                 <DataTable.Title style={styles.nameHeader}>
                   Name
                 </DataTable.Title>
@@ -353,10 +358,8 @@ export default class MiaOrders extends React.Component {
                 <DataTable.Title style={styles.addressHeader}>
                   Address
                 </DataTable.Title> */}
-                <DataTable.Title style={styles.deliveryDateHeader}>
-                  Delivery Date
-                </DataTable.Title>
-                <DataTable.Title style={styles.deliveryDateHeader}>
+                
+                <DataTable.Title style={styles.claimHeader}>
                   Claim
                 </DataTable.Title>
                 {/* <DataTable.Title numeric style={styles.quantityHeader}>
@@ -682,6 +685,14 @@ const styles = StyleSheet.create({
     color: "#093b15",
   },
   deliveryDateHeader: {
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent:"flex-start",
+    flex: 1
+  },
+
+  claimHeader: {
     position: "relative",
     alignSelf: "center",
     alignItems: "center",
