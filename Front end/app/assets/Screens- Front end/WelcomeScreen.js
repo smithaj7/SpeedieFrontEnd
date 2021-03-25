@@ -91,6 +91,10 @@ export default class WelcomeScreen extends React.Component {
       return val.Location;
     });
 
+    var employeeRole = this.state.dataSource.map((val, key) => {
+      return val.Role;
+    });
+
     console.log(li[0]);
     console.log(this.state.email);
     console.log(this.state.password);
@@ -107,7 +111,7 @@ export default class WelcomeScreen extends React.Component {
         this.props.navigation.navigate("AllOrders");
       } else if (location == "Miami") {
         var userName = this.state.email;
-        this.props.navigation.navigate("MiaOrders", { user: userName });
+        this.props.navigation.navigate("MiaOrders", { user: userName, loc: location, role: employeeRole });
       } else if (location == "New Orleans") {
         this.props.navigation.navigate("NolaOrders");
       } else if (location == "Chicago") {

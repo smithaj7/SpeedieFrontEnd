@@ -59,11 +59,10 @@ export default class WelcomeScreen extends React.Component {
   }
 
   getData = async () => {
-    return await fetch("http://localhost:7071/api/ForgotPassword", {
+    return await fetch("http://localhost:7071/api/AccountInfo", {
       method: "POST",
       body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
+        email: this.props.navigation.state.params.user
       }),
     })
       .then((response) => response.json())
@@ -143,12 +142,25 @@ export default class WelcomeScreen extends React.Component {
     //     loggedIn: true,
     //   });
     // }
+    var ordersTaken = this.state.dataSource.map((val, key) => {
+         return val.OrdersTaken;
+       });
+    var bottlesReturned = this.state.dataSource.map((val, key) => {
+        return val.BottlesReturned;
+      });
+
+    
+    var location = this.state.dataSource.map((val, key) => {
+        return val.Location;
+      });
 
     return (
       <View style={styles.container}>
         <View style = {styles.banner}>
           <Text style={styles.bannerText}>Account information</Text>
         </View>
+        <View style={styles.accountInfo}>
+          <Text style={styles.viewHeader}>Login</Text>
         <View style={styles.emailView}>
             <Text style={styles.textStyle}>Email address: {this.props.navigation.state.params.user}</Text>
         </View>
@@ -161,17 +173,24 @@ export default class WelcomeScreen extends React.Component {
             </TouchableOpacity>
             
         </View>
+        </View>
+        <View style={styles.performanceView}>
+          <Text style = {styles.viewHeader}>Employee Info</Text>
         <View style={styles.BottlesView}>
             <Text style={styles.textStyle}>Location: {this.props.navigation.state.params.location}</Text>
         </View>
         <View style={styles.BottlesView}>
-            <Text style={styles.textStyle}>Role: </Text>
+            <Text style={styles.textStyle}>Role: {this.props.navigation.state.params.role}</Text>
+        </View>
+        </View>
+        <View style={styles.performanceView}>
+        <Text style = {styles.viewHeader}>Performance</Text>
+        <View style={styles.BottlesView}>
+            <Text style={styles.textStyle}>Number of deliveries: {ordersTaken}</Text>
         </View>
         <View style={styles.BottlesView}>
-            <Text style={styles.textStyle}>Number of deliveries: </Text>
+            <Text style={styles.textStyle}>Bottles Returned: {bottlesReturned}</Text>
         </View>
-        <View style={styles.BottlesView}>
-            <Text style={styles.textStyle}>Bottles Returned: </Text>
         </View>
         <View style={styles.menuView}>
             <TouchableOpacity style={styles.leftButton}>
@@ -202,8 +221,8 @@ const styles = StyleSheet.create({
   },
   banner:{
     width: "100%",
-    //height: "13%",
-    flex: 1,
+    //height: "17%",
+    flex: 1.5,
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
@@ -217,10 +236,18 @@ const styles = StyleSheet.create({
     //alignSelf: "center",
     //alignItems: "center",
   },
+
+  viewHeader: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#113B08"
+    
+  },
   
   emailView: {
     flex: 1,
     width: "100%",
+    //height: "10%",
     alignSelf: "flex-start",
     justifyContent: "flex-start",
     alignItems: "flex-start",
@@ -229,10 +256,35 @@ const styles = StyleSheet.create({
   PasswordView: {
     flex: 1,
     width: "100%",
+    //height: "10%",
     alignSelf: "flex-start",
     justifyContent: "flex-start",
     alignItems: "flex-start",
   },
+  
+  accountInfo : {
+    marginTop: "4%",
+    flex: 3,
+    width: "90%",
+    borderColor: "gray",
+    borderWidth: 2,
+    borderRadius: 10,
+    alignSelf: "center",
+    alignItems: "center"
+    
+  },
+
+  performanceView : {
+    marginTop: "4%",
+    flex: 2,
+    width: "90%",
+    borderColor: "gray",
+    borderWidth: 2,
+    borderRadius: 10,
+    alignSelf: "center",
+    alignItems: "center"
+  },
+
   changePasswordBtn : {
       width: "40%",
       //backgroundColor: "yellow"
@@ -240,6 +292,7 @@ const styles = StyleSheet.create({
   BottlesView: {
     flex: 1,
     width: "100%",
+    //height: "10%",
     alignSelf: "flex-start",
     justifyContent: "flex-start",
     alignItems: "flex-start",
@@ -299,7 +352,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    //marginTop: 20,
+    marginTop: "3%",
+    //height: "18%",
     flex: 1.5,
     width: "100%",
     backgroundColor: "#093b15"
@@ -311,6 +365,8 @@ const styles = StyleSheet.create({
     //backgroundColor: "yellow",
     flex: 1,
     height: "100%",
+    borderRightWidth: 1,
+    borderRightColor: "white",
     //width: "20%",
     //height: "100%", 
   },
@@ -318,6 +374,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
+    borderRightWidth: 1,
+    borderRightColor: "white",
     //backgroundColor: "yellow",
     //width: "20%",
     //height: "100%", 
