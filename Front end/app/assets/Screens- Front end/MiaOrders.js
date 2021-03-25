@@ -185,12 +185,12 @@ export default class MiaOrders extends React.Component {
               if (this.state.orderStatus == "A") {
                 return (
                   <DataTable.Row style={{ backgroundColor: "#D3D3D3" }} key={i}>
-                    <DataTable.Cell>{i + 1}</DataTable.Cell>
+                    {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
                     <DataTable.Cell>{val.names[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
+                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
                     <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.quantities[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
                     <DataTable.Cell>
                       <TouchableOpacity
                         style={styles.editOrder}
@@ -204,12 +204,12 @@ export default class MiaOrders extends React.Component {
               } else {
                 return (
                   <DataTable.Row style={{ backgroundColor: "#D3D3D3" }} key={i}>
-                    <DataTable.Cell>{i + 1}</DataTable.Cell>
+                    {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
                     <DataTable.Cell>{val.names[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
+                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
                     <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.quantities[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
                     <DataTable.Cell>
                       <TouchableOpacity
                         style={styles.reopenOrder}
@@ -225,12 +225,12 @@ export default class MiaOrders extends React.Component {
               if (this.state.orderStatus == "A") {
                 return (
                   <DataTable.Row style={{ backgroundColor: "white" }} key={i}>
-                    <DataTable.Cell>{i + 1}</DataTable.Cell>
+                    {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
                     <DataTable.Cell>{val.names[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
+                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
                     <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.quantities[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
                     <DataTable.Cell>
                       <TouchableOpacity
                         style={styles.editOrder}
@@ -244,12 +244,12 @@ export default class MiaOrders extends React.Component {
               } else {
                 return (
                   <DataTable.Row style={{ backgroundColor: "white" }} key={i}>
-                    <DataTable.Cell>{i + 1}</DataTable.Cell>
+                    {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
                     <DataTable.Cell>{val.names[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>
+                    <DataTable.Cell>{val.addresses[i]}</DataTable.Cell> */}
                     <DataTable.Cell>{val.deliveryDates[i]}</DataTable.Cell>
-                    <DataTable.Cell>{val.quantities[i]}</DataTable.Cell>
+                    {/* <DataTable.Cell>{val.quantities[i]}</DataTable.Cell> */}
                     <DataTable.Cell>
                       <TouchableOpacity
                         style={styles.reopenOrder}
@@ -313,7 +313,7 @@ export default class MiaOrders extends React.Component {
 
           <ScrollView
             style={{
-              width: "90%",
+              width: "95%",
               height: "70%",
               position: "relative",
               alignSelf: "center",
@@ -336,32 +336,37 @@ export default class MiaOrders extends React.Component {
               }}
             >
               <DataTable.Header style={{ backgroundColor: "#ABD7EB" }}>
-                <DataTable.Title
+                <View style={styles.headerView}>
+                {/* <DataTable.Title
                   numeric
                   sortDirection="ascending"
                   style={styles.orderIDHeader}
                 >
                   OrderID
-                </DataTable.Title>
+                </DataTable.Title> */}
                 <DataTable.Title style={styles.nameHeader}>
                   Name
                 </DataTable.Title>
-                <DataTable.Title numeric style={styles.phoneHeader}>
+                {/* <DataTable.Title numeric style={styles.phoneHeader}>
                   Phone
                 </DataTable.Title>
                 <DataTable.Title style={styles.addressHeader}>
                   Address
-                </DataTable.Title>
+                </DataTable.Title> */}
                 <DataTable.Title style={styles.deliveryDateHeader}>
                   Delivery Date
                 </DataTable.Title>
-                <DataTable.Title numeric style={styles.quantityHeader}>
-                  Quantity
+                <DataTable.Title style={styles.deliveryDateHeader}>
+                  Claim
                 </DataTable.Title>
-                <DataTable.Title
+                {/* <DataTable.Title numeric style={styles.quantityHeader}>
+                  Quantity
+                </DataTable.Title> */}
+                {/* <DataTable.Title
                   numeric
                   style={styles.phoneHeader}
-                ></DataTable.Title>
+                ></DataTable.Title> */}
+                </View>
               </DataTable.Header>
               <ScrollView>{orders}</ScrollView>
 
@@ -374,88 +379,7 @@ export default class MiaOrders extends React.Component {
                 //label={"1-" + arrLength + " of " + arrLength}
               ></DataTable.Pagination>
             </DataTable>
-            <TextInput
-              style={styles.newOrderStyle}
-              placeholder="Name..."
-              onChangeText={(text) => this.setState({ newName: text })}
-            ></TextInput>
-            <TextInput
-              style={{
-                width: 130,
-                height: 35,
-                borderColor: "black",
-                borderWidth: 1,
-                borderRadius: 10,
-                backgroundColor: "#D3D3D3",
-                position: "absolute",
-                bottom: 5,
-                left: 360,
-              }}
-              placeholder="(xxx)-xxx-xxxx"
-              onChangeText={(text) => this.setState({ newPhone: text })}
-            ></TextInput>
-            <TextInput
-              style={{
-                width: 130,
-                height: 35,
-                borderColor: "black",
-                borderWidth: 1,
-                borderRadius: 10,
-                backgroundColor: "#D3D3D3",
-                position: "absolute",
-                bottom: 5,
-                left: 530,
-              }}
-              placeholder="Address..."
-              onChangeText={(text) => this.setState({ newAddress: text })}
-            ></TextInput>
-            <TextInput
-              style={{
-                width: 130,
-                height: 35,
-                borderColor: "black",
-                borderWidth: 1,
-                borderRadius: 10,
-                backgroundColor: "#D3D3D3",
-                position: "absolute",
-                bottom: 5,
-                left: 700,
-              }}
-              placeholder="mm/dd/yyyy"
-              onChangeText={(text) => this.setState({ newDeliveryDate: text })}
-            ></TextInput>
-            <TextInput
-              style={{
-                width: 110,
-                height: 35,
-                borderColor: "black",
-                borderWidth: 1,
-                borderRadius: 10,
-                backgroundColor: "#D3D3D3",
-                position: "absolute",
-                bottom: 5,
-                left: 870,
-              }}
-              placeholder="Quantity..."
-              onChangeText={(text) => this.setState({ newQuantity: text })}
-            ></TextInput>
-            <TouchableOpacity
-              style={{
-                width: 60,
-                height: 40,
-                borderColor: "black",
-                borderWidth: 1,
-                borderRadius: 10,
-                backgroundColor: "aqua",
-                position: "absolute",
-                bottom: 5,
-                left: 990,
-              }}
-              onPress={this.addOrderPressHandler}
-            >
-              <Text style={styles.addText}>Add</Text>
-            </TouchableOpacity>
-            <Text style={styles.plusSign}>+</Text>
+           
           </ScrollView>
           <View style={styles.menuView}>
             <TouchableOpacity style={styles.leftButton}>
@@ -557,7 +481,7 @@ const styles = StyleSheet.create({
   },
   header: {
     height: "10%",
-    width: "90%",
+    width: "100%",
     position: "relative",
     alignSelf: "center",
     alignItems: "center",
@@ -571,10 +495,10 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     position: "relative",
-    marginTop: 10,
-    width: "40%",
+    marginTop: "4%",
+    width: "70%",
     alignSelf: "flex-start",
-    left: 70
+    //left: 70
   },
   newOrderStyle: {
     width: 130,
@@ -602,6 +526,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 32,
     top: 175,
+  },
+  headerView: {
+    flex: 1,
+    flexDirection: "row",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   addText: {
     color: "black",
@@ -706,25 +637,40 @@ const styles = StyleSheet.create({
     //right: 40,
   },
   nameHeader: {
-    position: "absolute",
-    left: 180,
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent:"flex-start",
+    flex: 1
   },
   orderIDHeader: {
-    position: "absolute",
-    left: 10,
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent:"center",
+    flex: 1
   },
 
   phoneHeader: {
-    position: "absolute",
-    left: 350,
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent:"center",
+    flex: 1
   },
   addressHeader: {
-    position: "absolute",
-    left: 520,
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent:"center",
+    flex: 1
   },
   quantityHeader: {
-    position: "absolute",
-    left: 850,
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent:"center",
+    flex: 1
   },
   orderHeader: {
     position: "relative",
@@ -736,35 +682,42 @@ const styles = StyleSheet.create({
     color: "#093b15",
   },
   deliveryDateHeader: {
-    position: "absolute",
-    left: 690,
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent:"flex-start",
+    flex: 1
   },
   editOrder: {
     backgroundColor: "#9AC6A2",
-    width: "33%",
-    height: "85%",
-    position: "absolute",
-    top: 5,
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    
+    //justifyContent: "center",
+    
     //right: 30,
     borderRadius: 7,
   },
 
   reopenOrder: {
     backgroundColor: "#FF6961",
-    width: "45%",
-    height: "85%",
-    position: "absolute",
-    top: 5,
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    //justifyContent: "center",
     //right: 30,
     borderRadius: 7,
   },
   editText: {
     color: "black",
     fontWeight: "bold",
-    fontSize: 15,
-    position: "absolute",
-    top: 13,
-    right: 9,
+    fontSize: 19,
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    //right: 9,
   },
   menuView: {
     position: "relative",
@@ -774,13 +727,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 20,
     height: "10%",
-    width: "90%",
+    width: "100%",
     backgroundColor: "#093b15"
   },
   leftButton: {
     alignSelf: "center",
     alignItems: "center",
     justifyContent:"center",
+    borderRightWidth: 1,
+    borderRightColor: "white",
     //backgroundColor: "yellow",
     flex: 1,
     height: "100%",
@@ -791,7 +746,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    //backgroundColor: "yellow",
+    borderRightWidth: 1,
+    borderRightColor: "white",
     //width: "20%",
     //height: "100%", 
     flex: 1,
