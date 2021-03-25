@@ -146,8 +146,8 @@ export default class WelcomeScreen extends React.Component {
 
     return (
       <View style={styles.container}>
+        <Image style = {styles.logo} source={require("../../../SpeediePNG.png")}></Image>
         <View style = {styles.banner}>
-          <Text style={styles.bannerText}>Speedie Bean</Text>
         </View>
         <Text style={styles.loginHeader}>Reset Password</Text>
         <View style={styles.EmailInputView}>
@@ -181,8 +181,8 @@ export default class WelcomeScreen extends React.Component {
           />
         </View>
 
-        <TouchableOpacity style={styles.loginBtn} onPress={this._handlePress}>
-          <Text style={styles.loginText}>Reset</Text>
+        <TouchableOpacity style={styles.resetBtn} onPress={this._handlePress}>
+          <Text style={styles.resetText}>Reset</Text>
         </TouchableOpacity>
       </View>
     );
@@ -196,38 +196,40 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFFFFF",
     alignItems: "flex-start",
-    justifyContent: "center",
-  },
-  banner:{
-    width: "90%",
-    height: "13%",
-    //flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    backgroundColor: "#113B08",
-
-  },
-  bannerText:{
-    fontSize: 26,
-    fontWeight: "bold",
-    color: "white",
-    //alignSelf: "center",
-    //alignItems: "center",
+    // justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
   logo: {
-    width: "18%",
-    height: "18%",
+    width: "30%",
+    height: "10%",
     position: "relative",
-    alignSelf: "center",
+    alignSelf: "flex-start",
+    marginTop: "10%"
   },
+  // banner:{
+  //   width: "90%",
+  //   height: "13%",
+  //   //flex: 1,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   alignSelf: "center",
+  //   backgroundColor: "#113B08",
+
+  // },
+  // bannerText:{
+  //   fontSize: 26,
+  //   fontWeight: "bold",
+  //   color: "white",
+  //   //alignSelf: "center",
+  //   //alignItems: "center",
+  // },
   loginHeader: {
     fontSize: 20,
     fontWeight: "bold",
     color: "black",
     position: "relative",
     alignSelf: "center",
-    paddingTop: 20,
   },
   EmailInputView: {
     width: "90%",
@@ -235,48 +237,34 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: "black",
     borderRadius: 15,
-    height: "13%",
-    marginTop: 20,
+    height: "8%",
+    marginTop: "5%",
     alignSelf: "center",
-    padding: 20,
+    padding: "5%",
   },
-
   PasswordInputView: {
     width: "90%",
     backgroundColor: "white",
     borderWidth: 1.5,
     borderColor: "black",
     borderRadius: 15,
-    height: "13%",
-    marginTop: 20,
+    height: "8%",
+    marginTop: "5%",
     position: "relative",
-    top: 0,
-    right: 0,
-    //marginTop: 60,
-    //justifyContent: "center",
-    // alignItems: "flex-start",
-
     alignSelf: "center",
-    padding: 20,
+    padding: "5%",
   },
-
   ConfirmPasswordInputView: {
     width: "90%",
     backgroundColor: "white",
     borderWidth: 1.5,
     borderColor: "black",
     borderRadius: 15,
-    height: "13%",
-    marginTop: 20,
+    height: "8%",
+    marginTop: "5%",
     position: "relative",
-    top: 0,
-    right: 0,
-    //marginTop: 60,
-    //justifyContent: "center",
-    // alignItems: "flex-start",
-
     alignSelf: "center",
-    padding: 20,
+    padding: "5%",
   },
   inputText: {
     height: "90%",
@@ -284,44 +272,23 @@ const styles = StyleSheet.create({
     width: "85%",
     color: "black",
   },
-  forgotText: {
-    color: "blue",
-    fontSize: 17,
-    alignSelf: "center",
-  },
-  touchableText: {
-    backgroundColor: "white",
-    height: 50,
-    width: "10%",
-    right: 190,
-    position: "relative",
-    alignSelf: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 8,
-
-  },
-  loginBtn: {
+  resetBtn: {
     width: "35%%",
     backgroundColor: "#113B08",
     borderRadius: 10,
-    height: 50,
-    right: 160,
-    //alignItems: "center",
-    //justifyContent: "center",
-    alignSelf: "flex-start",
-    left: 20,
+    height: "6%",
+    alignSelf: "center",
     position: "relative",
-    marginTop: 50,
-    marginBottom: 10,
+    marginTop: "5%",
+    marginBottom: "2%",
   },
-  loginText: {
+  resetText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
     position: "relative",
     right: 0,
-    top: 15,
+    top: "30%",
   },
 });
