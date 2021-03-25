@@ -23,6 +23,7 @@ export default class WelcomeScreen extends React.Component {
     };
 
     this._handlePress = this._handlePress.bind(this);
+    this.changePasswordPress = this.changePasswordPress.bind(this);
     //this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
 
@@ -77,6 +78,10 @@ export default class WelcomeScreen extends React.Component {
         console.log(error);
       });
   };
+
+  changePasswordPress(){
+    this.props.navigation.navigate("ForgotPassword")
+  }
 
   _handlePress = async () => {
       if (this.state.password != this.state.confirmPassword){
@@ -169,7 +174,7 @@ export default class WelcomeScreen extends React.Component {
         </View>
         <View style={styles.BottlesView}>
             <TouchableOpacity style={styles.changePasswordBtn}>
-                <Text style={{fontSize: 15, color: "blue"}}>Change Password?</Text>
+                <Text style={{fontSize: 15, color: "blue"}} onPress={this.changePasswordPress}>Change Password?</Text>
             </TouchableOpacity>
             
         </View>
