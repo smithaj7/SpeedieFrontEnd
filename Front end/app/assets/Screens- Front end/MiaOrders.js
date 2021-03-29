@@ -70,8 +70,8 @@ export default class MiaOrders extends React.Component {
     return fetch("http://localhost:7071/api/HttpTrigger1", {
       method: "POST",
       body: JSON.stringify({
-        location: "Miami",
-        orderStatus: this.state.orderStatus,
+        location: this.props.navigation.state.params.loc,
+        //orderStatus: this.state.orderStatus,
       }),
     })
       .then((response) => response.json())
@@ -92,9 +92,9 @@ export default class MiaOrders extends React.Component {
     return fetch("http://localhost:7071/api/HttpTrigger1", {
       method: "POST",
       body: JSON.stringify({
-        location: "Miami",
+        location: this.props.navigation.state.params.loc,
         searchText: text,
-        orderStatus: this.state.orderStatus,
+        //orderStatus: this.state.orderStatus,
       }),
     })
       .then((response) => response.json())
@@ -116,7 +116,7 @@ export default class MiaOrders extends React.Component {
       body: JSON.stringify({
         name: this.state.newName,
         phone: this.state.newPhone,
-        location: "Miami",
+        location: this.props.navigation.state.params.loc,
         deliveryDate: this.state.newDeliveryDate,
         address: this.state.newAddress,
         quantity: this.state.newQuantity,
@@ -164,10 +164,11 @@ export default class MiaOrders extends React.Component {
     return fetch("http://localhost:7071/api/FillOrder", {
       method: "POST",
       body: JSON.stringify({
-        location: "Miami",
+        location: this.props.navigation.state.params.loc,
         orderNumber: i + 1,
         newStatus: orderStatus,
         filledBy: user,
+        bottlesReturned: 1,
       }),
     }).then(this.refreshScreen);
   }
@@ -192,7 +193,7 @@ export default class MiaOrders extends React.Component {
         orders.push(
           this.state.dataSource.map((val, index) => {
             if (i % 2 == 1) {
-              if (this.state.orderStatus == "A") {
+              if (val.orderStatuses[i] == "A") {
                 return (
                   <DataTable.Row style={{ backgroundColor: "#D3D3D3" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
@@ -204,7 +205,7 @@ export default class MiaOrders extends React.Component {
                     <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.editOrder}
-                        onPress={this.fillOrder.bind(this, i, "A")}
+                        onPress={this.fillOrder.bind(this, i, "I")}
                       >
                         <Text style={styles.editText}>Fulfill</Text>
                       </TouchableOpacity>
@@ -223,16 +224,16 @@ export default class MiaOrders extends React.Component {
                     <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.reopenOrder}
-                        onPress={this.fillOrder.bind(this, i, "I")}
+                        onPress={this.fillOrder.bind(this, i, "C")}
                       >
-                        <Text style={styles.editText}>Reopen</Text>
+                        <Text style={styles.editText}>Close</Text>
                       </TouchableOpacity>
                     </DataTable.Cell>
                   </DataTable.Row>
                 );
               }
             } else {
-              if (this.state.orderStatus == "A") {
+              if (val.orderStatuses[i] == "A") {
                 return (
                   <DataTable.Row style={{ backgroundColor: "white" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
@@ -244,7 +245,7 @@ export default class MiaOrders extends React.Component {
                     <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.editOrder}
-                        onPress={this.fillOrder.bind(this, i, "A")}
+                        onPress={this.fillOrder.bind(this, i, "I")}
                       >
                         <Text style={styles.editText}>Fulfill</Text>
                       </TouchableOpacity>
@@ -263,9 +264,9 @@ export default class MiaOrders extends React.Component {
                     <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.reopenOrder}
-                        onPress={this.fillOrder.bind(this, i, "I")}
+                        onPress={this.fillOrder.bind(this, i, "C")}
                       >
-                        <Text style={styles.editText}>Reopen</Text>
+                        <Text style={styles.editText}>Close</Text>
                       </TouchableOpacity>
                     </DataTable.Cell>
                   </DataTable.Row>
@@ -280,7 +281,7 @@ export default class MiaOrders extends React.Component {
       return (
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={styles.text}>Miami Orders</Text>
+            <Text style={styles.text}>{this.props.navigation.state.params.loc} Orders</Text>
             {/* <TouchableOpacity
               style={styles.touch}
               onPress={this.newOrderPressHandler}

@@ -108,14 +108,14 @@ export default class WelcomeScreen extends React.Component {
         () => console.log(this.state.loggedIn)
       );
       if (location == "All") {
-        this.props.navigation.navigate("AllOrders");
+        this.props.navigation.navigate("MiaOrders", { user: userName, loc: location, role: employeeRole });
       } else if (location == "Miami") {
         var userName = this.state.email;
         this.props.navigation.navigate("MiaOrders", { user: userName, loc: location, role: employeeRole });
       } else if (location == "New Orleans") {
-        this.props.navigation.navigate("NolaOrders");
+        this.props.navigation.navigate("MiaOrders", { user: userName, loc: location, role: employeeRole });
       } else if (location == "Chicago") {
-        this.props.navigation.navigate("ChiOrders");
+        this.props.navigation.navigate("MiaOrders", { user: userName, loc: location, role: employeeRole });
       }
     } else {
       alert("Invalid username or password");
