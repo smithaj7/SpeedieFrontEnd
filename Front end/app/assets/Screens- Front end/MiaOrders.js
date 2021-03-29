@@ -150,7 +150,7 @@ export default class MiaOrders extends React.Component {
   }
 
   inventoryPressHandler() {
-    this.props.navigation.navigate("Inventory");
+    this.props.navigation.navigate("Inventory", {user: email, location: loc, role: employeeRole});
   }
 
   refreshScreen = () => {
@@ -398,7 +398,7 @@ export default class MiaOrders extends React.Component {
             <TouchableOpacity style={styles.leftButton}>
               <Text style={styles.menuText}>Orders</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.middleButton}>
+            <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler}>
             <Text style={styles.menuText}>Inventory</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.rightButton}>

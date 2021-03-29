@@ -10,7 +10,7 @@ import {
 
 import {navigation, SafeAreaView} from "react-navigation";
 
-export default class WelcomeScreen extends React.Component {
+export default class LandingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -108,14 +108,14 @@ export default class WelcomeScreen extends React.Component {
         () => console.log(this.state.loggedIn)
       );
       if (location == "All") {
-        this.props.navigation.navigate("LandingPage", { user: userName, loc: location, role: employeeRole });
+        this.props.navigation.navigate("MiaOrders", { user: userName, loc: location, role: employeeRole });
       } else if (location == "Miami") {
         var userName = this.state.email;
-        this.props.navigation.navigate("LandingPage", { user: userName, loc: location, role: employeeRole });
+        this.props.navigation.navigate("MiaOrders", { user: userName, loc: location, role: employeeRole });
       } else if (location == "New Orleans") {
-        this.props.navigation.navigate("LandingPage", { user: userName, loc: location, role: employeeRole });
+        this.props.navigation.navigate("MiaOrders", { user: userName, loc: location, role: employeeRole });
       } else if (location == "Chicago") {
-        this.props.navigation.navigate("LandingPage", { user: userName, loc: location, role: employeeRole });
+        this.props.navigation.navigate("MiaOrders", { user: userName, loc: location, role: employeeRole });
       }
     } else {
       alert("Invalid username or password");
@@ -142,34 +142,20 @@ export default class WelcomeScreen extends React.Component {
         {/* <View style = {styles.banner}>
           <Text style={styles.bannerText}>Speedie Login</Text>
         </View> */}
+    
         <Image style = {styles.logo} source={require("../../../SpeediePNG.png")}></Image>
-        <Text style={styles.loginHeader}>Login to Speedie Bean below:</Text>
-        <View style={styles.EmailInputView}>
-          <TextInput
-            style={styles.inputText}
-            placeholder="Email"
-            placeholderTextColor="#003f5c"
-            onChangeText={(text) => this.setState({ email: text })}
-            onSubmitEditing={this._handlePress}
-          />
-        </View>
-        <View style={styles.PasswordInputView}>
-          <TextInput
-            secureTextEntry
-            style={styles.inputText}
-            placeholder="Password"
-            placeholderTextColor="#003f5c"
-            onChangeText={(text) => this.setState({ password: text })}
-            onSubmitEditing={this._handlePress}
-          />
-        </View>
-        <TouchableOpacity style={styles.touchableText} onPress={this._handleForgotPress}>
-        <Text style={styles.forgotText}>Forgot Password?</Text>
+        
+        <TouchableOpacity style={styles.menuButton}>
+            <Text>Orders</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.loginBtn} onPress={this._handlePress}>
-          <Text style={styles.loginText}>LOGIN</Text>
+        <TouchableOpacity style={styles.menuButton}>
+            <Text>Inventory</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.menuButton}>
+            <Text>Account</Text>
+        </TouchableOpacity>
+        
+        
       </SafeAreaView>
     );
   }
@@ -180,11 +166,10 @@ const styles = StyleSheet.create({
   //   flex: 1,
   // },
   container: {
-    backgroundColor: "#FFFFFF",
-    alignItems: "flex-start",
+    backgroundColor: "#C2E2C3",
+    //alignItems: "flex-start",
     // justifyContent: "center",
-    width: "100%",
-    height: "100%",
+    flex: 1,
   },
   // banner:{
   //   width: "90%",
@@ -205,10 +190,22 @@ const styles = StyleSheet.create({
   // },
   logo: {
     width: "60%",
-    height: "25%",
+    height: "30%",
     position: "relative",
     alignSelf: "center",
     marginTop: "7%"
+  },
+
+  menuButton: {
+    position: "relative",
+    alignSelf: "center",
+    marginTop: "5%",
+    backgroundColor: "#113B08",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "15%",
+    width: "50%",
+    borderRadius: 15,
   },
   loginHeader: {
     fontSize: 20,
@@ -219,29 +216,7 @@ const styles = StyleSheet.create({
     left: "7%",
     // paddingTop: 20,
   },
-  EmailInputView: {
-    width: "90%",
-    backgroundColor: "white",
-    borderWidth: 1.5,
-    borderColor: "black",
-    borderRadius: 15,
-    height: "10%",
-    marginTop: "4%",
-    alignSelf: "center",
-    padding: "5%",
-  },
-  PasswordInputView: {
-    width: "90%",
-    backgroundColor: "white",
-    borderWidth: 1.5,
-    borderColor: "black",
-    borderRadius: 15,
-    height: "10%",
-    marginTop: "4%",
-    position: "relative",
-    alignSelf: "center",
-    padding: "5%",
-  },
+  
   inputText: {
     height: "90%",
     fontSize: 18,
@@ -264,25 +239,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: "3%",
   },
-  loginBtn: {
-    width: "35%",
-    backgroundColor: "#113B08",
-    borderRadius: 10,
-    height: "8%",
-    //left: 20,
-    //alignItems: "center",
-    //justifyContent: "center",
-    alignSelf: "center",
-    position: "relative",
-    marginTop: "8%",
-    marginBottom: "1%",
-  },
-  loginText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    position: "relative",
-    top: "35%",
-  },
+ 
 });
