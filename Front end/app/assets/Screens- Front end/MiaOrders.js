@@ -128,7 +128,7 @@ export default class MiaOrders extends React.Component {
       .then(this.refreshScreen);
   }
   newOrderPressHandler() {
-    this.props.navigation.push("NewOrder");
+    this.props.navigation.navigate("NewOrder");
   }
 
   archivedPressHandler = async () => {
@@ -150,7 +150,7 @@ export default class MiaOrders extends React.Component {
   }
 
   inventoryPressHandler() {
-    this.props.navigation.push("Inventory");
+    this.props.navigation.navigate("Inventory");
   }
 
   refreshScreen = () => {
@@ -207,7 +207,7 @@ export default class MiaOrders extends React.Component {
                         style={styles.editOrder}
                         onPress={this.fillOrder.bind(this, i, "I")}
                       >
-                        <Text style={styles.editText}>Fulfill</Text>
+                        <Text style={styles.editText}>Claim</Text>
                       </TouchableOpacity>
                     </DataTable.Cell>
                   </DataTable.Row>
@@ -247,7 +247,7 @@ export default class MiaOrders extends React.Component {
                         style={styles.editOrder}
                         onPress={this.fillOrder.bind(this, i, "I")}
                       >
-                        <Text style={styles.editText}>Fulfill</Text>
+                        <Text style={styles.editText}>Claim</Text>
                       </TouchableOpacity>
                     </DataTable.Cell>
                   </DataTable.Row>

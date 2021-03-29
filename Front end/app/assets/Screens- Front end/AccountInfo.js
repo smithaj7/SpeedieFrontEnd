@@ -23,6 +23,7 @@ export default class WelcomeScreen extends React.Component {
     };
 
     this._handlePress = this._handlePress.bind(this);
+    this.ordersPress = this.ordersPress.bind(this);
     this.changePasswordPress = this.changePasswordPress.bind(this);
     //this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
@@ -79,6 +80,9 @@ export default class WelcomeScreen extends React.Component {
       });
   };
 
+  ordersPress(){
+    this.props.navigation.navigate("MiaOrders")
+  }
   changePasswordPress(){
     this.props.navigation.navigate("ForgotPassword")
   }
@@ -198,11 +202,11 @@ export default class WelcomeScreen extends React.Component {
         </View>
         </View>
         <View style={styles.menuView}>
-            <TouchableOpacity style={styles.leftButton}>
-              <Text style={styles.menuText}>Orders</Text>
+            <TouchableOpacity style={styles.leftButton} onPress={this.ordersPress}>
+              <Text style={styles.menuText} >Orders</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.middleButton}>
-            <Text style={styles.menuText}>Inventory</Text>
+            <TouchableOpacity style={styles.middleButton} >
+            <Text style={styles.menuText} >Inventory</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.rightButton}>
             <Text style={styles.menuText}>Account</Text>
