@@ -24,7 +24,8 @@ export default class LandingPage extends React.Component {
     this._handlePress = this._handlePress.bind(this);
     this._handleForgotPress = this._handleForgotPress.bind(this);
     this._handleAccountPress = this._handleAccountPress.bind(this);
-
+    this.ordersPressHandler = this.ordersPressHandler.bind(this);
+    this.inventoryPressHandler = this.inventoryPressHandler.bind(this);
     //this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
 
@@ -132,7 +133,21 @@ export default class LandingPage extends React.Component {
   }
 
   inventoryPressHandler() {
+    const { params } = this.props.navigation.state;
+    var email = params.user;
+    var loc = params.loc;
+    var employeeRole = params.role;
     this.props.navigation.navigate("Inventory", {user: email, location: loc, role: employeeRole});
+  }
+
+  ordersPressHandler() {
+    const { params } = this.props.navigation.state;
+    var email = params.user;
+    var loc = params.loc;
+    var employeeRole = params.role;
+    console.log("Email: ",email)
+    console.log("Location: ",loc)
+    this.props.navigation.navigate("MiaOrders", {user: email, location: loc, role: employeeRole});
   }
 
   _handleForgotPress(){
@@ -158,7 +173,7 @@ export default class LandingPage extends React.Component {
     
         <Image style = {styles.logo} source={require("../../../Darker Green Logo.png")}></Image>
         
-        <TouchableOpacity style={styles.menuButton}>
+        <TouchableOpacity style={styles.menuButton} onPress={this.ordersPressHandler}>
             <Text style={styles.buttonText}>Orders</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuButton} onPress={this.inventoryPressHandler}>

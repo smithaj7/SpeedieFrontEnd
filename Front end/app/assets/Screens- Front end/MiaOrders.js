@@ -50,6 +50,7 @@ export default class MiaOrders extends React.Component {
     this.archivedPressHandler = this.archivedPressHandler.bind(this);
     this.addOrderPressHandler = this.addOrderPressHandler.bind(this);
     this._handleAccountPress = this._handleAccountPress.bind(this);
+    this.infoPress = this.infoPress.bind(this);
   }
 
   componentDidMount() {
@@ -70,7 +71,7 @@ export default class MiaOrders extends React.Component {
     return fetch("http://localhost:7071/api/HttpTrigger1", {
       method: "POST",
       body: JSON.stringify({
-        location: this.props.navigation.state.params.loc,
+        location: this.props.navigation.state.params.location,
         //orderStatus: this.state.orderStatus,
       }),
     })
@@ -92,7 +93,7 @@ export default class MiaOrders extends React.Component {
     return fetch("http://localhost:7071/api/HttpTrigger1", {
       method: "POST",
       body: JSON.stringify({
-        location: this.props.navigation.state.params.loc,
+        location: this.props.navigation.state.params.location,
         searchText: text,
         //orderStatus: this.state.orderStatus,
       }),
@@ -144,13 +145,17 @@ export default class MiaOrders extends React.Component {
   _handleAccountPress(){
     const { params } = this.props.navigation.state;
     var email = params.user;
-    var loc = params.loc;
+    var loc = params.location;
     var employeeRole = params.role;
     this.props.navigation.navigate("AccountInfo", {user: email, location: loc, role: employeeRole});
   }
 
   inventoryPressHandler() {
     this.props.navigation.navigate("Inventory", {user: email, location: loc, role: employeeRole});
+  }
+
+  infoPress(){
+
   }
 
   refreshScreen = () => {
@@ -164,7 +169,7 @@ export default class MiaOrders extends React.Component {
     return fetch("http://localhost:7071/api/FillOrder", {
       method: "POST",
       body: JSON.stringify({
-        location: this.props.navigation.state.params.loc,
+        location: this.props.navigation.state.params.location,
         orderNumber: i + 1,
         newStatus: orderStatus,
         filledBy: user,
@@ -197,6 +202,13 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "#D3D3D3" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
+                    <DataTable.Cell style={{flex: .2}} >
+                      <TouchableOpacity
+                      style={styles.infoButton}
+                      onPress={this.infoPress}>
+                        <Text style={{color: "blue", fontWeight: "bold"}}>+</Text>
+                      </TouchableOpacity>
+                    </DataTable.Cell>
                     <DataTable.Cell style={{flex: .5}} >{val.deliveryDates[i]}</DataTable.Cell>
                     {/* <DataTable.Cell style={{flex: 1}}>{val.names[i]}</DataTable.Cell> */}
                     {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>*/}
@@ -216,6 +228,13 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "#D3D3D3" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
+                    <DataTable.Cell style={{flex: .2}} >
+                      <TouchableOpacity
+                      style={styles.infoButton}
+                      onPress={this.infoPress}>
+                        <Text style={{color: "blue", fontWeight: "bold"}}>+</Text>
+                      </TouchableOpacity>
+                    </DataTable.Cell>
                     <DataTable.Cell style={{flex: .5}} >{val.deliveryDates[i]}</DataTable.Cell>
                     {/* <DataTable.Cell style={{flex: 1}}>{val.names[i]}</DataTable.Cell> */}
                     {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>*/}
@@ -237,6 +256,13 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "white" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
+                    <DataTable.Cell style={{flex: .2}} >
+                      <TouchableOpacity
+                      style={styles.infoButton}
+                      onPress={this.infoPress}>
+                        <Text style={{color: "blue", fontWeight: "bold"}}>+</Text>
+                      </TouchableOpacity>
+                    </DataTable.Cell>
                     <DataTable.Cell style={{flex: .5}} >{val.deliveryDates[i]}</DataTable.Cell>
                     {/* <DataTable.Cell style={{flex: 1}}>{val.names[i]}</DataTable.Cell> */}
                     {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>*/}
@@ -256,6 +282,13 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={{ backgroundColor: "white" }} key={i}>
                     {/* <DataTable.Cell>{i + 1}</DataTable.Cell> */}
+                    <DataTable.Cell style={{flex: .2}} >
+                      <TouchableOpacity
+                      style={styles.infoButton}
+                      onPress={this.infoPress}>
+                        <Text style={{color: "blue", fontWeight: "bold"}}>+</Text>
+                      </TouchableOpacity>
+                    </DataTable.Cell>
                     <DataTable.Cell style={{flex: .5}} >{val.deliveryDates[i]}</DataTable.Cell>
                     {/* <DataTable.Cell style={{flex: 1}}>{val.names[i]}</DataTable.Cell> */}
                     {/* <DataTable.Cell>{val.phoneNumbers[i]}</DataTable.Cell>*/}
@@ -281,7 +314,7 @@ export default class MiaOrders extends React.Component {
       return (
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={styles.text}>{this.props.navigation.state.params.loc} Orders</Text>
+            <Text style={styles.text}>{this.props.navigation.state.params.location} Orders</Text>
             {/* <TouchableOpacity
               style={styles.touch}
               onPress={this.newOrderPressHandler}
@@ -309,7 +342,7 @@ export default class MiaOrders extends React.Component {
             style={styles.searchBar}
             onChangeText={(text) => this.onChangeSearch(text)}
           ></Searchbar>
-          <RadioButton
+          {/* <RadioButton
             value="Outstanding"
             status={this.state.orderStatus === "A" ? "checked" : "unchecked"}
             onPress={this.outstandingPressHandler}
@@ -320,7 +353,7 @@ export default class MiaOrders extends React.Component {
             onPress={this.archivedPressHandler}
           ></RadioButton>
           <Text style={styles.unfulfilledText}>Unfulfilled</Text>
-          <Text style={styles.fulfilledText}>Fulfilled</Text>
+          <Text style={styles.fulfilledText}>Fulfilled</Text> */}
 
           <ScrollView
             style={{
@@ -328,6 +361,7 @@ export default class MiaOrders extends React.Component {
               height: "70%",
               position: "relative",
               alignSelf: "center",
+              marginTop: "10%"
               //top: 250,
               //right: 200,
             }}
@@ -355,6 +389,10 @@ export default class MiaOrders extends React.Component {
                 >
                   OrderID
                 </DataTable.Title> */}
+                <DataTable.Title 
+                style={styles.moreInfoHeader}>
+                  +
+                </DataTable.Title>
                 <DataTable.Title 
                 style={styles.deliveryDateHeader}>
                   Delivery Date
@@ -701,6 +739,13 @@ const styles = StyleSheet.create({
     justifyContent:"flex-start",
     flex: .5
   },
+  moreInfoHeader: {
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent:"flex-start",
+    flex: .2,
+  },
 
   claimHeader: {
     position: "relative",
@@ -711,6 +756,17 @@ const styles = StyleSheet.create({
   },
   editOrder: {
     backgroundColor: "#9AC6A2",
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    
+    //justifyContent: "center",
+    
+    //right: 30,
+    borderRadius: 7,
+  },
+  infoButton: {
+    backgroundColor: "white",
     width: "100%",
     height: "100%",
     position: "relative",

@@ -16,14 +16,6 @@ import AccountInfo from "../app/assets/Screens- Front end/AccountInfo"
 
 const screens = {
 
-  LandingPage: {
-    screen: LandingPage,
-    navigationOptions: {
-      header: null,
-    }
-    
-  },
-  
   Login: {
     screen: Login,
     navigationOptions: {
@@ -31,6 +23,15 @@ const screens = {
     }
     
   },
+
+  LandingPage: {
+    screen: LandingPage,
+    navigationOptions: {
+      header: null,
+    }
+    
+  },
+
 
 
   ForgotPassword: {
