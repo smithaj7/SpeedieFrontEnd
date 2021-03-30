@@ -23,6 +23,7 @@ export default class LandingPage extends React.Component {
 
     this._handlePress = this._handlePress.bind(this);
     this._handleForgotPress = this._handleForgotPress.bind(this);
+    this._handleAccountPress = this._handleAccountPress.bind(this);
 
     //this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
@@ -122,6 +123,18 @@ export default class LandingPage extends React.Component {
     }
   };
 
+  _handleAccountPress(){
+    const { params } = this.props.navigation.state;
+    var email = params.user;
+    var loc = params.loc;
+    var employeeRole = params.role;
+    this.props.navigation.navigate("AccountInfo", {user: email, location: loc, role: employeeRole});
+  }
+
+  inventoryPressHandler() {
+    this.props.navigation.navigate("Inventory", {user: email, location: loc, role: employeeRole});
+  }
+
   _handleForgotPress(){
     this.props.navigation.navigate("ForgotPassword");
   }
@@ -143,16 +156,16 @@ export default class LandingPage extends React.Component {
           <Text style={styles.bannerText}>Speedie Login</Text>
         </View> */}
     
-        <Image style = {styles.logo} source={require("../../../SpeediePNG.png")}></Image>
+        <Image style = {styles.logo} source={require("../../../Darker Green Logo.png")}></Image>
         
         <TouchableOpacity style={styles.menuButton}>
-            <Text>Orders</Text>
+            <Text style={styles.buttonText}>Orders</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuButton}>
-            <Text>Inventory</Text>
+        <TouchableOpacity style={styles.menuButton} onPress={this.inventoryPressHandler}>
+            <Text style={styles.buttonText}>Inventory</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuButton}>
-            <Text>Account</Text>
+        <TouchableOpacity style={styles.menuButton} onPress={this._handleAccountPress}>
+            <Text style={styles.buttonText}>Account</Text>
         </TouchableOpacity>
         
         
@@ -190,23 +203,31 @@ const styles = StyleSheet.create({
   // },
   logo: {
     width: "60%",
-    height: "30%",
+    height: "35%",
     position: "relative",
     alignSelf: "center",
-    marginTop: "7%"
+    marginTop: "7%",
+    
   },
 
   menuButton: {
     position: "relative",
     alignSelf: "center",
-    marginTop: "5%",
+    marginTop: "10%",
     backgroundColor: "#113B08",
     alignItems: "center",
     justifyContent: "center",
-    height: "15%",
-    width: "50%",
+    height: "12%",
+    width: "45%",
     borderRadius: 15,
   },
+
+  buttonText: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "white",
+  },
+
   loginHeader: {
     fontSize: 20,
     // fontWeight: "bold",
