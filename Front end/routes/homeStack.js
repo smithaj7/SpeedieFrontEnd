@@ -15,13 +15,6 @@ import ChiOrders from "../app/assets/Screens- Front end/ChiOrders";
 import AccountInfo from "../app/assets/Screens- Front end/AccountInfo"
 
 const screens = {
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      header: null,
-    }
-    
-  },
 
   LandingPage: {
     screen: LandingPage,
@@ -30,6 +23,15 @@ const screens = {
     }
     
   },
+  
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      header: null,
+    }
+    
+  },
+
 
   ForgotPassword: {
     screen: ForgotPassword,
