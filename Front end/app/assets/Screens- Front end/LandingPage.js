@@ -24,7 +24,8 @@ export default class LandingPage extends React.Component {
     this._handlePress = this._handlePress.bind(this);
     this._handleOrdersPress = this._handleOrdersPress.bind(this);
     this._handleAccountPress = this._handleAccountPress.bind(this);
-
+    this.ordersPressHandler = this.ordersPressHandler.bind(this);
+    this.inventoryPressHandler = this.inventoryPressHandler.bind(this);
     //this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
 

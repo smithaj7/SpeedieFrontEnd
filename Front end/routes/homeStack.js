@@ -14,6 +14,7 @@ import ChiOrders from "../app/assets/Screens- Front end/ChiOrders";
 import AccountInfo from "../app/assets/Screens- Front end/AccountInfo"
 
 const screens = {
+
   Login: {
     screen: Login,
     navigationOptions: {
@@ -21,6 +22,16 @@ const screens = {
     }
     
   },
+
+  LandingPage: {
+    screen: LandingPage,
+    navigationOptions: {
+      header: null,
+    }
+    
+  },
+
+
 
   ForgotPassword: {
     screen: ForgotPassword,
@@ -80,6 +91,7 @@ const screens = {
   },
   
 };
+
 const HomeStack = createStackNavigator(screens);
 
 export default createAppContainer(HomeStack);
