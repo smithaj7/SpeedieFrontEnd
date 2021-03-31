@@ -22,7 +22,7 @@ export default class LandingPage extends React.Component {
     };
 
     this._handlePress = this._handlePress.bind(this);
-    this._handleOrdersPress = this._handleOrdersPress.bind(this);
+    this._handleForgotPress = this._handleForgotPress.bind(this);
     this._handleAccountPress = this._handleAccountPress.bind(this);
     this.ordersPressHandler = this.ordersPressHandler.bind(this);
     this.inventoryPressHandler = this.inventoryPressHandler.bind(this);
@@ -140,12 +140,18 @@ export default class LandingPage extends React.Component {
     this.props.navigation.navigate("Inventory", {user: email, location: loc, role: employeeRole});
   }
 
-  _handleOrdersPress(){
-    // const { params } = this.props.navigation.state;
-    // var email = params.user;
-    // var loc = params.loc;
-    // var employeeRole = params.role;
-    this.props.navigation.navigate("MiaOrders");
+  ordersPressHandler() {
+    const { params } = this.props.navigation.state;
+    var email = params.user;
+    var loc = params.loc;
+    var employeeRole = params.role;
+    console.log("Email: ",email)
+    console.log("Location: ",loc)
+    this.props.navigation.navigate("MiaOrders", {user: email, location: loc, role: employeeRole});
+  }
+
+  _handleForgotPress(){
+    this.props.navigation.navigate("ForgotPassword");
   }
 
   render() {
@@ -167,7 +173,7 @@ export default class LandingPage extends React.Component {
     
         <Image style = {styles.logo} source={require("../../../DarkerGreenLogo.png")}></Image>
         
-        <TouchableOpacity style={styles.menuButton} onPress={this._handleOrdersPress}>
+        <TouchableOpacity style={styles.menuButton} onPress={this.ordersPressHandler}>
             <Text style={styles.buttonText}>Orders</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuButton} onPress={this.inventoryPressHandler}>
@@ -189,7 +195,7 @@ const styles = StyleSheet.create({
   // },
   container: {
     backgroundColor: "#C2E2C3",
-    // alignItems: "flex-start",
+    //alignItems: "flex-start",
     // justifyContent: "center",
     flex: 1,
   },
@@ -211,7 +217,7 @@ const styles = StyleSheet.create({
   //   //alignItems: "center",
   // },
   logo: {
-    width: "70%",
+    width: "60%",
     height: "35%",
     position: "relative",
     alignSelf: "center",
@@ -232,7 +238,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "bold",
     color: "white",
   },
