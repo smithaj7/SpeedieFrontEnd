@@ -22,7 +22,7 @@ export default class LandingPage extends React.Component {
     };
 
     this._handlePress = this._handlePress.bind(this);
-    this._handleForgotPress = this._handleForgotPress.bind(this);
+    this._handleOrdersPress = this._handleOrdersPress.bind(this);
     this._handleAccountPress = this._handleAccountPress.bind(this);
 
     //this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
@@ -132,11 +132,19 @@ export default class LandingPage extends React.Component {
   }
 
   inventoryPressHandler() {
+    const { params } = this.props.navigation.state;
+    var email = params.user;
+    var loc = params.loc;
+    var employeeRole = params.role;
     this.props.navigation.navigate("Inventory", {user: email, location: loc, role: employeeRole});
   }
 
-  _handleForgotPress(){
-    this.props.navigation.navigate("ForgotPassword");
+  _handleOrdersPress(){
+    // const { params } = this.props.navigation.state;
+    // var email = params.user;
+    // var loc = params.loc;
+    // var employeeRole = params.role;
+    this.props.navigation.navigate("MiaOrders");
   }
 
   render() {
@@ -156,9 +164,9 @@ export default class LandingPage extends React.Component {
           <Text style={styles.bannerText}>Speedie Login</Text>
         </View> */}
     
-        <Image style = {styles.logo} source={require("../../../Darker Green Logo.png")}></Image>
+        <Image style = {styles.logo} source={require("../../../DarkerGreenLogo.png")}></Image>
         
-        <TouchableOpacity style={styles.menuButton}>
+        <TouchableOpacity style={styles.menuButton} onPress={this._handleOrdersPress}>
             <Text style={styles.buttonText}>Orders</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuButton} onPress={this.inventoryPressHandler}>
@@ -180,7 +188,7 @@ const styles = StyleSheet.create({
   // },
   container: {
     backgroundColor: "#C2E2C3",
-    //alignItems: "flex-start",
+    // alignItems: "flex-start",
     // justifyContent: "center",
     flex: 1,
   },
@@ -202,7 +210,7 @@ const styles = StyleSheet.create({
   //   //alignItems: "center",
   // },
   logo: {
-    width: "60%",
+    width: "70%",
     height: "35%",
     position: "relative",
     alignSelf: "center",
@@ -223,7 +231,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: "bold",
     color: "white",
   },
