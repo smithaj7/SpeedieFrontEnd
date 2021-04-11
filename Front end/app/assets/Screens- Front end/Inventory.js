@@ -339,7 +339,7 @@
 // });
 
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity, Alert, Image, ActivityIndicator,} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert, Image, ActivityIndicator, Modal} from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -353,6 +353,7 @@ export default class Inventory extends React.Component {
           // location: "",
           // driver: "",
           // items: [],
+          dataSource: "",
           tableHead: ['Bottle Size', 'Quantity', 'Add Inventory'],
           tableData: [['Quart', '3', 'n/a'],
                       ['Pint', '7', 'n/a'],
@@ -361,11 +362,50 @@ export default class Inventory extends React.Component {
         };
     
         this.controller;
-        
+        this.displayModal = this.displayModal.bind(this);
       }
+
+      itemChange = async (item) => {
+        
+        await fetch("http://localhost:7071/api/getInventory", {
+          method: "POST",
+          body: JSON.stringify({
+            location: item.value,
+          }),
+        })
+          .then((response) => response.json())
+          .then((responseJson) => {
+            console.log(responseJson);
+            this.setState({
+              isLoading: false,
+              dataSource: [responseJson],
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+          var numQuarts = this.state.dataSource.map((val, key) => {
+            return val.Quarts;
+          });
+
+          var numHalfGals = this.state.dataSource.map((val, key) => {
+            return val.HalfGals;
+          });
+
+          
+          this.setState({tableData: [['Quart', numQuarts, 'n/a'],
+          ['HG', numHalfGals, 'n/a']],})
+      };
+
+      
     
       _alertIndex(index) {
-        Alert.alert(`This is row ${index + 1}`);
+        alert(`This is row ${index + 1}`);
+    }
+
+    displayModal = () => {
+      this.setState({isVisible: true})
     }
     
     // constructor(props) {
@@ -424,9 +464,11 @@ export default class Inventory extends React.Component {
         //     }
         //   }
           // console.log("items: " + this.state.items);
+         
+
         const state = this.state;
         const element = (data, index) => (
-        <TouchableOpacity onPress={() => this._alertIndex(index)}>
+        <TouchableOpacity onPress={()  => {this._alertIndex(index)}}>
             <View style={styles.btn}>
             <Text style={styles.btnText}>Add Inventory</Text>
             </View>
@@ -460,7 +502,7 @@ export default class Inventory extends React.Component {
                 width: "50%",
                 alignSelf: "center"
               }}
-              onChangeItem={(item) => this.setState({ location: item.value})}
+              onChangeItem={(item) => {this.itemChange(item)}}
             ></DropDownPicker>
 
             <View style={styles.container2}>
@@ -471,6 +513,7 @@ export default class Inventory extends React.Component {
                     <TableWrapper key={index} style={styles.row}>
                         {
                         rowData.map((cellData, cellIndex) => (
+                          
                             <Cell key={cellIndex} data={cellIndex === 2 ? element(cellData, index) : cellData} textStyle={styles.text}/>
                         ))
                         }
@@ -531,7 +574,7 @@ const styles = StyleSheet.create({
   row: { 
     flexDirection: 'row', 
     backgroundColor: '#C4A484' ,
-    height: "15%"
+    height: "25%"
   },
   btn: { 
     width: "95%", 
@@ -544,5 +587,12 @@ const styles = StyleSheet.create({
     textAlign: 'center', 
     color: 'black',
     fontWeight: "bold",
-  }
+  },
+
+  modalContainer: {
+    height: "50%",
+    width: "50%",
+    backgroundColor: "black"
+  },
+
 });

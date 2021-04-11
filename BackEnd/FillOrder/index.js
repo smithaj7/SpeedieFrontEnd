@@ -1,33 +1,30 @@
-const accountSid = "AC5f15274869368d4f486ed2f45e9ff6aa";
-const authToken = "ee0149c2c913d3be2674231b1e78735e";
-const client = require("twilio")(accountSid, authToken);
+//Create connection to SQL database
 const { poolPromise } = require("./DBconnection");
 const sql = require("mssql");
 
 module.exports = async function (context, req) {
   context.log("JavaScript HTTP trigger function processed a request.");
   var statusCode = 200;
+
+  //Parameters included in the API request
   var location = req.body.location;
   var orderNumber = req.body.orderNumber;
   var newStatus = req.body.newStatus;
   var filledBy = req.body.filledBy;
-  console.log("Location",location)
-  console.log("Filled By ",filledBy)
-  //var deliveryDT = req.body.deliveryDT;
-  //var customerPhone = req.body.customerPhone;
   var bottlesReturned = req.body.bottlesReturned;
+
   try {
     const pool = await poolPromise;
     const request = pool.request();
 
+    //Convert API parameters into SQL variables
     request.input("filledBy", sql.VarChar, filledBy);
     request.input("newStatus", sql.VarChar, newStatus);
-    //request.input("customerPhone", sql.NVarChar, customerPhone);
     request.input("bottlesReturned", sql.Int, bottlesReturned);
     request.input("location", sql.VarChar, location);
     request.input("orderID", sql.Int, orderNumber);
     
-    //console.log("Filled: " + filledBy);
+    //Query to change that status of an outstanding order to a claimed one
     if (newStatus == 'I'){
     const sqlString =
         "Declare @NewOrderID INT " +
@@ -40,13 +37,16 @@ module.exports = async function (context, req) {
         "UPDATE Orders SET Order_Status = @newStatus WHERE OrderID = @NewOrderID ";
     await request.query(sqlString);
     }
+    //Query to change that status of a claimed order to a closed one
     else {
-      //request.input("deliveryDT", sql.Date, deliveryDT);
       const sqlString =
+          //Declare SQL variables
           "Declare @NewOrderID INT " +
           "Declare @CustomerPhone varchar(30) " +
           "Declare @DeliveryDT Date " +
           "DECLARE @EmployeeID INT " +
+
+          //Find employee ID using the email parameter
           "SELECT @EmployeeID = (SELECT EmployeeID FROM Employee WHERE Email=@filledBy) " +
           "SELECT ROW_NUMBER() OVER(ORDER BY OrderID) AS RowNum,* " +
           "INTO #temp " +
@@ -56,6 +56,8 @@ module.exports = async function (context, req) {
           "WHERE RowNum = @orderID " +
           "UPDATE Orders SET Order_Status = @newStatus WHERE OrderID = @NewOrderID " +
 
+          //Insert order record into order history table and delete the record from
+          //the active orders table
           "INSERT INTO OrderHistory VALUES (@DeliveryDT, @CustomerPhone, @EmployeeID, @bottlesReturned) " +
           "DELETE FROM Orders WHERE OrderID = @NewOrderID";
       await request.query(sqlString);

@@ -171,7 +171,7 @@ export default class LandingPage extends React.Component {
           <Text style={styles.bannerText}>Speedie Login</Text>
         </View> */}
     
-        <Image style = {styles.logo} source={require("../../../DarkerGreenLogo.png")}></Image>
+        <Image style = {styles.logo} source={require("../../../Darker Green Logo.png")}></Image>
         
         <TouchableOpacity style={styles.menuButton} onPress={this.ordersPressHandler}>
             <Text style={styles.buttonText}>Orders</Text>
