@@ -151,6 +151,10 @@ export default class MiaOrders extends React.Component {
   }
 
   inventoryPressHandler() {
+    const { params } = this.props.navigation.state;
+    var email = params.user;
+    var loc = params.location;
+    var employeeRole = params.role;
     this.props.navigation.navigate("Inventory", {user: email, location: loc, role: employeeRole});
   }
 
