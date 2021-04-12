@@ -54,7 +54,6 @@ export default class MiaOrders extends React.Component {
     this.archivedPressHandler = this.archivedPressHandler.bind(this);
     this.addOrderPressHandler = this.addOrderPressHandler.bind(this);
     this._handleAccountPress = this._handleAccountPress.bind(this);
-    this.infoPress = this.infoPress.bind(this);
   }
 
   componentDidMount() {
