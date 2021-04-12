@@ -25,6 +25,7 @@ export default class WelcomeScreen extends React.Component {
     this._handlePress = this._handlePress.bind(this);
     this.ordersPress = this.ordersPress.bind(this);
     this.changePasswordPress = this.changePasswordPress.bind(this);
+    this.inventoryPressHandler = this.inventoryPressHandler.bind(this);
     //this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
 
@@ -82,6 +83,9 @@ export default class WelcomeScreen extends React.Component {
 
   ordersPress(){
     this.props.navigation.navigate("MiaOrders")
+  }
+  inventoryPressHandler() {
+    this.props.navigation.navigate("Inventory")
   }
   changePasswordPress(){
     this.props.navigation.navigate("ForgotPassword")
