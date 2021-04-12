@@ -342,6 +342,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Alert, Image, ActivityIndicator, Modal} from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import DropDownPicker from "react-native-dropdown-picker";
+import navigation from "react-navigation";
 
 export default class Inventory extends React.Component {
     constructor(props) {
@@ -363,6 +364,10 @@ export default class Inventory extends React.Component {
     
         this.controller;
         this.displayModal = this.displayModal.bind(this);
+        this._handleAccountPress = this._handleAccountPress.bind(this);
+        this.ordersPressHandler = this.ordersPressHandler.bind(this);
+        this.inventoryPressHandler = this.inventoryPressHandler.bind(this);
+
       }
 
       itemChange = async (item) => {
@@ -406,6 +411,34 @@ export default class Inventory extends React.Component {
 
     displayModal = () => {
       this.setState({isVisible: true})
+    }
+
+    _handleAccountPress(){
+      const { params } = this.props.navigation.state;
+      var email = params.user;
+      var loc = params.location;
+      var employeeRole = params.role;
+      this.props.navigation.navigate("AccountInfo", {user: email, location: loc, role: employeeRole});
+    }
+  
+    inventoryPressHandler() {
+      const { params } = this.props.navigation.state;
+      var email = params.user;
+      var loc = params.location;
+      var employeeRole = params.role;
+      this.props.navigation.navigate("Inventory", {user: email, location: loc, role: employeeRole});
+    }
+
+    ordersPressHandler(){
+      const { params } = this.props.navigation.state;
+      var email = params.user;
+      var loc = params.location;
+      var employeeRole = params.role;
+      this.props.navigation.navigate("MiaOrders", {user: email, location: loc, role: employeeRole});
+    }
+  
+    infoPress(){
+  
     }
     
     // constructor(props) {
@@ -522,7 +555,19 @@ export default class Inventory extends React.Component {
                 }
                 </Table>
             </View>
+            <View style={styles.menuView}>
+            <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
+              <Text style={styles.menuText}>Orders</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler}>
+            <Text style={styles.menuText}>Inventory</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.rightButton}>
+            <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
+            </TouchableOpacity>
+          </View>
         </View>
+        
         )
     }
 }
@@ -594,5 +639,54 @@ const styles = StyleSheet.create({
     width: "50%",
     backgroundColor: "black"
   },
+  menuView: {
+    position: "relative",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: 20,
+    height: "10%",
+    width: "100%",
+    backgroundColor: "#093b15"
+  },
+  leftButton: {
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent:"center",
+    borderRightWidth: 1,
+    borderRightColor: "white",
+    //backgroundColor: "yellow",
+    flex: 1,
+    height: "100%",
+    //width: "20%",
+    //height: "100%", 
+  },
+  middleButton: {
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRightWidth: 1,
+    borderRightColor: "white",
+    //width: "20%",
+    //height: "100%", 
+    flex: 1,
+    height: "100%",
+  },
+  rightButton: {
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    //backgroundColor: "yellow",
+    //width: "20%",
+    //height: "100%", 
+    flex: 1,
+    height: "100%",
 
+  },
+  menuText: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "white"
+  }
 });
