@@ -31,14 +31,32 @@ module.exports = async function (context, req) {
     // for each login request. If the login request succeeds, we return the location and
     // role the user is bound to so their experience is catered to that location/role.
     var sqlString = "";
+    var qts = 1;
+    var hgs = 1;
     if (size == "Quarts"){
+        if (amount < 0){
+            sqlString = "SELECT Quarts FROM Inventory WHERE location = @location"
+            var query = await request.query(sqlString);
+            qts = query.recordset[0].Quarts;
+        }
+        if (qts >= 1){
         sqlString = "UPDATE Inventory SET Quarts = Quarts + @amount WHERE Location = @location"
+        await request.query(sqlString);
+        }
     }
     else{
+        if (amount < 0){
+            sqlString = "SELECT HalfGals FROM Inventory WHERE location = @location"
+            var query = await request.query(sqlString);
+            hgs = query.recordset[0].HalfGals;
+        }
+        if (hgs >=1){
         sqlString = "UPDATE Inventory SET HalfGals = HalfGals + @amount WHERE Location = @location"
+        await request.query(sqlString);
+        }
     }
     
-    await request.query(sqlString);
+    
     
     sqlString = "SELECT * FROM Inventory WHERE location = @location"
     var query = await request.query(sqlString);

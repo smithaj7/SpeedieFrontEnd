@@ -23,9 +23,10 @@ export default class WelcomeScreen extends React.Component {
     };
 
     this._handlePress = this._handlePress.bind(this);
-    this.ordersPress = this.ordersPress.bind(this);
+    this.ordersPressHandler = this.ordersPressHandler.bind(this);
     this.changePasswordPress = this.changePasswordPress.bind(this);
     this.inventoryPressHandler = this.inventoryPressHandler.bind(this);
+    this._handleAccountPress = this._handleAccountPress.bind(this);
     //this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
 
@@ -81,12 +82,29 @@ export default class WelcomeScreen extends React.Component {
       });
   };
 
-  ordersPress(){
-    this.props.navigation.navigate("MiaOrders")
+  _handleAccountPress(){
+    const { params } = this.props.navigation.state;
+    var email = params.user;
+    var loc = params.location;
+    var employeeRole = params.role;
+    this.props.navigation.navigate("AccountInfo", {user: email, location: loc, role: employeeRole});
   }
+
   inventoryPressHandler() {
-    this.props.navigation.navigate("Inventory")
+    const { params } = this.props.navigation.state;
+    var email = params.user;
+    var loc = params.location;
+    var employeeRole = params.role;
+    this.props.navigation.navigate("Inventory", {user: email, location: loc, role: employeeRole});
   }
+
+  ordersPressHandler(){
+    const { params } = this.props.navigation.state;
+    var email = params.user;
+    var loc = params.location;
+    var employeeRole = params.role;
+    this.props.navigation.navigate("MiaOrders", {user: email, location: loc, role: employeeRole});
+  } 
   changePasswordPress(){
     this.props.navigation.navigate("ForgotPassword")
   }
@@ -206,13 +224,13 @@ export default class WelcomeScreen extends React.Component {
         </View>
         </View>
         <View style={styles.menuView}>
-            <TouchableOpacity style={styles.leftButton} onPress={this.ordersPress}>
+            <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
               <Text style={styles.menuText} >Orders</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.middleButton} >
+            <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler} >
             <Text style={styles.menuText} >Inventory</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.rightButton}>
+            <TouchableOpacity style={styles.rightButton} onPress={this._handleAccountPress}>
             <Text style={styles.menuText}>Account</Text>
             </TouchableOpacity>
           </View>

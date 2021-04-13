@@ -35,7 +35,8 @@ module.exports = async function (context, req) {
     var phones = [];
     var names = [];
     var addresses = [];
-    var quantities = [];
+    var quarts = [];
+    var halfGals = [];
     var locations = [];
     var deliveryDates = [];
     var orderStatuses = [];
@@ -47,7 +48,8 @@ module.exports = async function (context, req) {
       phones.push(query.recordset[i].Phone_Number);
       names.push(query.recordset[i].Name);
       addresses.push(query.recordset[i].Address);
-      quantities.push(query.recordset[i].Quantity);
+      quarts.push(query.recordset[i].Quarts);
+      halfGals.push(query.recordset[i].HalfGals);
       locations.push(query.recordset[i].Location);
       orderStatuses.push(query.recordset[i].Order_Status);
 
@@ -82,7 +84,8 @@ module.exports = async function (context, req) {
       phoneNumbers: phones,
       names: names,
       addresses: addresses,
-      quantities: quantities,
+      quarts: quarts,
+      halfGals: halfGals,
       locations: locations,
       deliveryDates: deliveryDates,
       orderStatuses: orderStatuses

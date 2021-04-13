@@ -166,7 +166,7 @@ export default class MiaOrders extends React.Component {
   };
 
 
-  fillOrder(i, orderStatus) {
+  fillOrder(i, orderStatus, qts, hgs) {
     const { params } = this.props.navigation.state;
     var user = params.user;
     return fetch("http://localhost:7071/api/FillOrder", {
@@ -177,6 +177,8 @@ export default class MiaOrders extends React.Component {
         newStatus: orderStatus,
         filledBy: user,
         bottlesReturned: 1,
+        quarts: qts,
+        halfGals: hgs,
       }),
     }).then(this.refreshScreen);
   }
@@ -206,7 +208,8 @@ export default class MiaOrders extends React.Component {
                           <div> Phone Number: {val.phoneNumbers[i]}</div>
                           <div> Location: {val.locations[i]}</div>
                           <div> Address: {val.addresses[i]}</div>
-                          <div> Quantity: {val.quantities[i]}</div>
+                          <div> Quarts: {val.quarts[i]}</div>
+                          <div> Half Gallons: {val.halfGals[i]}</div>
                           <div> Delivery Date: {val.deliveryDates[i]}</div>
                         </Popup>
                     </DataTable.Cell>
@@ -217,7 +220,7 @@ export default class MiaOrders extends React.Component {
                     <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.editOrder}
-                        onPress={this.fillOrder.bind(this, i, "I")}
+                        onPress={this.fillOrder.bind(this, i, "I",0,0)}
                       >
                         <Text style={styles.editText}>Claim</Text>
                       </TouchableOpacity>
@@ -233,7 +236,8 @@ export default class MiaOrders extends React.Component {
                           <div> Phone Number: {val.phoneNumbers[i]}</div>
                           <div> Location: {val.locations[i]}</div>
                           <div> Address: {val.addresses[i]}</div>
-                          <div> Quantity: {val.quantities[i]}</div>
+                          <div> Quarts: {val.quarts[i]}</div>
+                          <div> Half Gallons: {val.halfGals[i]}</div>
                           <div> Delivery Date: {val.deliveryDates[i]}</div>
                         </Popup>
                     </DataTable.Cell>
@@ -244,7 +248,7 @@ export default class MiaOrders extends React.Component {
                     <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.reopenOrder}
-                        onPress={this.fillOrder.bind(this, i, "C")}
+                        onPress={this.fillOrder.bind(this, i, "C", val.quarts[i],val.halfGals[i])}
                       >
                         <Text style={styles.editText}>Close</Text>
                       </TouchableOpacity>

@@ -132,8 +132,7 @@ export default class Inventory extends React.Component {
             var numHalfGals = this.state.dataSource.map((val, key) => {
               return val.HalfGals;
             });
-  
-            
+
             this.setState({tableData: [['Quart', numQuarts, 'n/a'],
             ['HG', numHalfGals, 'n/a']],})
   
@@ -202,7 +201,7 @@ export default class Inventory extends React.Component {
                 { label: "Chicago", value: "Chicago" },
                 // { label: "Select a City", placeHolder: "Select a city"}
               ]}
-              defaultValue={this.state.data}
+              // defaultValue={this.state.data}
               placeholder="Select a City"
               style={{ 
                 backgroundColor: "white", 
@@ -280,7 +279,7 @@ const styles = StyleSheet.create({
     flex: 1, 
     padding: 16, 
     paddingTop: 30, 
-    backgroundColor: '#fff' 
+    backgroundColor: '#fff', 
   },
   head: { 
     flex: 1.5, 
