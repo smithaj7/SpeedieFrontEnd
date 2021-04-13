@@ -38,10 +38,14 @@ export default class Inventory extends React.Component {
         );
       }
 
+      componentWillUnmount() {
+        this.willFocusSubscription.remove();
+      }
+
       
 
       getData = async () => {
-        fetch("http://localhost:7071/api/getInventory", {
+        await fetch("http://localhost:7071/api/getInventory", {
           method: "POST",
           body: JSON.stringify({
             location: this.state.location,
@@ -53,11 +57,27 @@ export default class Inventory extends React.Component {
             this.setState({
               isLoading: false,
               dataSource: [responseJson],
+
             });
           })
           .catch((error) => {
             console.log(error);
           });
+
+          if(this.state.location != ""){
+          var numQuarts = this.state.dataSource.map((val, key) => {
+            return val.Quarts;
+          });
+
+          var numHalfGals = this.state.dataSource.map((val, key) => {
+            return val.HalfGals;
+          });
+
+          
+          this.setState({tableData: [['Quart', numQuarts, 'n/a'],
+          ['HG', numHalfGals, 'n/a']],})
+        }
+
 
       }
 
