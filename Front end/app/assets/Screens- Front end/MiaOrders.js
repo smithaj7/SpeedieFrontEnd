@@ -215,7 +215,8 @@ export default class MiaOrders extends React.Component {
                             <div> Phone Number: {val.phoneNumbers[i]}</div>
                             <div> Location: {val.locations[i]}</div>
                             <div> Address: {val.addresses[i]}</div>
-                            <div> Quantity: {val.quantities[i]}</div>
+                            <div> Quarts: {val.quarts[i]}</div>
+                            <div> HGs: {val.halfGals[i]}</div>
                           </DialogContent>
                         </Dialog>
                     </DataTable.Cell>
@@ -250,7 +251,8 @@ export default class MiaOrders extends React.Component {
                             <div> Phone Number: {val.phoneNumbers[i]}</div>
                             <div> Location: {val.locations[i]}</div>
                             <div> Address: {val.addresses[i]}</div>
-                            <div> Quantity: {val.quantities[i]}</div>
+                            <div> Quarts: {val.quarts[i]}</div>
+                            <div> HGs: {val.halfGals[i]}</div>
                           </DialogContent>
                         </Dialog>
                     </DataTable.Cell>
