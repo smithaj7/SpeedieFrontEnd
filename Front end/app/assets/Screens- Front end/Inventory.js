@@ -11,13 +11,12 @@ export default class Inventory extends React.Component {
           // isLoading: true,
           // dataSource: [],
           // page: 0,
-          // location: "",
+          location: "",
           // driver: "",
           // items: [],
           dataSource: "",
           tableHead: ['Bottle Size', 'Quantity', 'Add Inventory'],
-          tableData: [['Quart', '3', 'n/a'],
-                      ['Pint', '7', 'n/a']],
+          tableData: [],
           data2: []
         };
     
@@ -26,6 +25,59 @@ export default class Inventory extends React.Component {
         this._handleAccountPress = this._handleAccountPress.bind(this);
         this.ordersPressHandler = this.ordersPressHandler.bind(this);
         this.inventoryPressHandler = this.inventoryPressHandler.bind(this);
+
+      }
+
+      componentDidMount() {
+        this.getData();
+        this.willFocusSubscription = this.props.navigation.addListener(
+          "willFocus",
+          () => {
+            this.getData();
+          }
+        );
+      }
+
+      componentWillUnmount() {
+        this.willFocusSubscription.remove();
+      }
+
+      
+
+      getData = async () => {
+        await fetch("http://localhost:7071/api/getInventory", {
+          method: "POST",
+          body: JSON.stringify({
+            location: this.state.location,
+          }),
+        })
+          .then((response) => response.json())
+          .then((responseJson) => {
+            console.log(responseJson);
+            this.setState({
+              isLoading: false,
+              dataSource: [responseJson],
+
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+          if(this.state.location != ""){
+          var numQuarts = this.state.dataSource.map((val, key) => {
+            return val.Quarts;
+          });
+
+          var numHalfGals = this.state.dataSource.map((val, key) => {
+            return val.HalfGals;
+          });
+
+          
+          this.setState({tableData: [['Quart', numQuarts, 'n/a'],
+          ['HG', numHalfGals, 'n/a']],})
+        }
+
 
       }
 
@@ -60,9 +112,55 @@ export default class Inventory extends React.Component {
           
           this.setState({tableData: [['Quart', numQuarts, 'n/a'],
           ['HG', numHalfGals, 'n/a']],})
+
+          this.setState({location: item.value})
       };
 
-      
+      addPress = async(index, amt) => {
+        var size = "";
+        if (index == 0){
+          size = "Quarts"
+        }
+        else{
+          size == "HalfGals"
+        }
+  
+        await fetch("http://localhost:7071/api/addInventory", {
+            method: "POST",
+            body: JSON.stringify({
+              size: size,
+              amount: amt,
+              location: this.state.location,
+            }),
+          })
+            .then((response) => response.json())
+            .then((responseJson) => {
+              console.log(responseJson);
+              this.setState({
+                isLoading: false,
+                dataSource: [responseJson],
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+  
+            var numQuarts = this.state.dataSource.map((val, key) => {
+              return val.Quarts;
+            });
+  
+            var numHalfGals = this.state.dataSource.map((val, key) => {
+              return val.HalfGals;
+            });
+
+            this.setState({tableData: [['Quart', numQuarts, 'n/a'],
+            ['HG', numHalfGals, 'n/a']],})
+  
+  
+            return this.getData();
+        
+  
+      } 
     
     _alertIndex(index) {
         alert(`This is row ${index + 1}`);
@@ -100,12 +198,18 @@ export default class Inventory extends React.Component {
     render() {
         const state = this.state;
         const element = (data, index) => (
-        <TouchableOpacity onPress={()  => {this._alertIndex(index)}}>
-            <View style={styles.btn}>
-            <Text style={styles.btnText}>Add Inventory</Text>
-            </View>
-        </TouchableOpacity>
+          <View style={{flex: 1, alignItems: "center", flexDirection: "row"}}>
+          <TouchableOpacity style = {styles.addBtn} onPress={()  => {this.addPress(index, 1)}}>
+              <Text style={styles.btnText}>+</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style = {styles.subBtn} onPress={()  => {this.addPress(index, -1)}}>
+              <Text style={styles.btnText}>-</Text>
+          </TouchableOpacity>
+          </View>
         );
+        
+        
+        
     
         return (
         <View style={styles.container}>
@@ -120,7 +224,7 @@ export default class Inventory extends React.Component {
                 { label: "Chicago", value: "Chicago" },
                 // { label: "Select a City", placeHolder: "Select a city"}
               ]}
-              defaultValue={this.state.data}
+              // defaultValue={this.state.data}
               placeholder="Select a City"
               style={{ 
                 backgroundColor: "white", 
@@ -154,16 +258,16 @@ export default class Inventory extends React.Component {
                 </Table>
             </View>
             <View style={styles.menuView}>
-            <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
-              <Text style={styles.menuText}>Orders</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler}>
-            <Text style={styles.menuText}>Inventory</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.rightButton}>
-            <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
+            <Text style={styles.menuText}>Orders</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler}>
+          <Text style={styles.menuText}>Inventory</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.rightButton}>
+          <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
+          </TouchableOpacity>
+        </View>
         </View>
         
         )
@@ -173,7 +277,7 @@ export default class Inventory extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1, 
-    padding: 16, 
+    //padding: 16, 
     paddingTop: 30, 
     backgroundColor: '#fff',
   },
@@ -198,10 +302,10 @@ const styles = StyleSheet.create({
     flex: 1, 
     padding: 16, 
     paddingTop: 30, 
-    backgroundColor: '#fff' 
+    backgroundColor: '#fff', 
   },
   head: { 
-    height: "20%", 
+    flex: 1.5, 
     backgroundColor: '#113B08' 
   },
   headText: {
@@ -217,13 +321,26 @@ const styles = StyleSheet.create({
   row: { 
     flexDirection: 'row', 
     backgroundColor: '#C4A484' ,
-    height: "25%"
+    flex: 1,
+    //height: "25%"
   },
-  btn: { 
-    width: "95%", 
+  addBtn: { 
+    width: "50%", 
     height: "80%", 
+    paddingBottom: "5%",
     backgroundColor: '#C2E2C3',  
     borderRadius: 2,
+    alignItems: "center"
+    // alignItems: "center",
+  },
+
+  subBtn: { 
+    width: "50%",
+    height: "80%", 
+    paddingBottom: "5%",
+    backgroundColor: '#FF6961',  
+    borderRadius: 2,
+    alignItems: "center"
     // alignItems: "center",
   },
   btnText: { 

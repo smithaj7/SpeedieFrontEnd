@@ -165,7 +165,7 @@ export default class MiaOrders extends React.Component {
   };
 
 
-  fillOrder(i, orderStatus) {
+  fillOrder(i, orderStatus, qts, hgs) {
     const { params } = this.props.navigation.state;
     var user = params.user;
     return fetch("http://localhost:7071/api/FillOrder", {
@@ -176,6 +176,8 @@ export default class MiaOrders extends React.Component {
         newStatus: orderStatus,
         filledBy: user,
         bottlesReturned: 1,
+        quarts: qts,
+        halfGals: hgs,
       }),
     }).then(this.refreshScreen);
   }
@@ -224,7 +226,7 @@ export default class MiaOrders extends React.Component {
                     <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.editOrder}
-                        onPress={this.fillOrder.bind(this, i, "I")}
+                        onPress={this.fillOrder.bind(this, i, "I",0,0)}
                       >
                         <Text style={styles.editText}>Claim</Text>
                       </TouchableOpacity>
@@ -259,7 +261,7 @@ export default class MiaOrders extends React.Component {
                     <DataTable.Cell style={{flex: .3}}>
                       <TouchableOpacity
                         style={styles.reopenOrder}
-                        onPress={this.fillOrder.bind(this, i, "C")}
+                        onPress={this.fillOrder.bind(this, i, "C", val.quarts[i],val.halfGals[i])}
                       >
                         <Text style={styles.editText}>Close</Text>
                       </TouchableOpacity>
@@ -270,6 +272,31 @@ export default class MiaOrders extends React.Component {
           })
         );
       }
+
+      var menu;
+        if (this.props.navigation.state.params.role == "Associate"){
+          menu = <View style={styles.menuView}>
+          <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
+            <Text style={styles.menuText}>Orders</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.rightButton}>
+          <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
+          </TouchableOpacity>
+        </View>
+        }
+        else{
+          menu = <View style={styles.menuView}>
+          <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
+            <Text style={styles.menuText}>Orders</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler}>
+          <Text style={styles.menuText}>Inventory</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.rightButton}>
+          <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
+          </TouchableOpacity>
+        </View>
+        }
 
       return (
         <View style={styles.container}>
@@ -347,17 +374,7 @@ export default class MiaOrders extends React.Component {
             </DataTable>
            
           </ScrollView>
-          <View style={styles.menuView}>
-            <TouchableOpacity style={styles.leftButton}>
-              <Text style={styles.menuText}>Orders</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler}>
-            <Text style={styles.menuText}>Inventory</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.rightButton}>
-            <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
-            </TouchableOpacity>
-          </View>
+          {menu}
         </View>
       );
     }

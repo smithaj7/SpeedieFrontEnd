@@ -12,6 +12,8 @@ module.exports = async function (context, req) {
   var newStatus = req.body.newStatus;
   var filledBy = req.body.filledBy;
   var bottlesReturned = req.body.bottlesReturned;
+  var quarts = req.body.quarts;
+  var halfGals = req.body.halfGals;
 
   try {
     const pool = await poolPromise;
@@ -39,6 +41,8 @@ module.exports = async function (context, req) {
     }
     //Query to change that status of a claimed order to a closed one
     else {
+      request.input("quarts", sql.Int, quarts);
+      request.input("halfGals", sql.Int, halfGals);
       const sqlString =
           //Declare SQL variables
           "Declare @NewOrderID INT " +
@@ -59,7 +63,9 @@ module.exports = async function (context, req) {
           //Insert order record into order history table and delete the record from
           //the active orders table
           "INSERT INTO OrderHistory VALUES (@DeliveryDT, @CustomerPhone, @EmployeeID, @bottlesReturned) " +
-          "DELETE FROM Orders WHERE OrderID = @NewOrderID";
+          "DELETE FROM Orders WHERE OrderID = @NewOrderID  " +
+          "UPDATE Inventory SET Quarts = Quarts - @quarts WHERE Location = @location " +
+          "UPDATE Inventory SET HalfGals = HalfGals - @halfGals WHERE Location = @location"; 
       await request.query(sqlString);
     }
     // request.input('location', sql.VarChar, location);
