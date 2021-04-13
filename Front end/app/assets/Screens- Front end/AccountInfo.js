@@ -185,6 +185,31 @@ export default class WelcomeScreen extends React.Component {
         return val.Location;
       });
 
+      var menu;
+      if (this.props.navigation.state.params.role == "Associate"){
+        menu = <View style={styles.menuView}>
+        <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
+          <Text style={styles.menuText}>Orders</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.rightButton}>
+        <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
+        </TouchableOpacity>
+      </View>
+      }
+      else{
+        menu = <View style={styles.menuView}>
+        <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
+          <Text style={styles.menuText}>Orders</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler}>
+        <Text style={styles.menuText}>Inventory</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.rightButton}>
+        <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
+        </TouchableOpacity>
+      </View>
+      }
+
     return (
       <View style={styles.container}>
         <View style = {styles.banner}>
@@ -223,17 +248,7 @@ export default class WelcomeScreen extends React.Component {
             <Text style={styles.textStyle}>Bottles Returned: {bottlesReturned}</Text>
         </View>
         </View>
-        <View style={styles.menuView}>
-            <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
-              <Text style={styles.menuText} >Orders</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler} >
-            <Text style={styles.menuText} >Inventory</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.rightButton} onPress={this._handleAccountPress}>
-            <Text style={styles.menuText}>Account</Text>
-            </TouchableOpacity>
-          </View>
+        {menu}
         
       </View>
     );

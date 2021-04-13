@@ -260,6 +260,31 @@ export default class MiaOrders extends React.Component {
         );
       }
 
+      var menu;
+        if (this.props.navigation.state.params.role == "Associate"){
+          menu = <View style={styles.menuView}>
+          <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
+            <Text style={styles.menuText}>Orders</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.rightButton}>
+          <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
+          </TouchableOpacity>
+        </View>
+        }
+        else{
+          menu = <View style={styles.menuView}>
+          <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
+            <Text style={styles.menuText}>Orders</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler}>
+          <Text style={styles.menuText}>Inventory</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.rightButton}>
+          <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
+          </TouchableOpacity>
+        </View>
+        }
+
       return (
         <View style={styles.container}>
           <View style={styles.header}>
@@ -336,17 +361,7 @@ export default class MiaOrders extends React.Component {
             </DataTable>
            
           </ScrollView>
-          <View style={styles.menuView}>
-            <TouchableOpacity style={styles.leftButton}>
-              <Text style={styles.menuText}>Orders</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler}>
-            <Text style={styles.menuText}>Inventory</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.rightButton}>
-            <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
-            </TouchableOpacity>
-          </View>
+          {menu}
         </View>
       );
     }

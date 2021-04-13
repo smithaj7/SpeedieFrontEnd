@@ -207,6 +207,9 @@ export default class Inventory extends React.Component {
           </TouchableOpacity>
           </View>
         );
+        
+        
+        
     
         return (
         <View style={styles.container}>
@@ -255,16 +258,16 @@ export default class Inventory extends React.Component {
                 </Table>
             </View>
             <View style={styles.menuView}>
-            <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
-              <Text style={styles.menuText}>Orders</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler}>
-            <Text style={styles.menuText}>Inventory</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.rightButton}>
-            <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity style={styles.leftButton} onPress={this.ordersPressHandler}>
+            <Text style={styles.menuText}>Orders</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.middleButton} onPress={this.inventoryPressHandler}>
+          <Text style={styles.menuText}>Inventory</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.rightButton}>
+          <Text style={styles.menuText} onPress={this._handleAccountPress}>Account</Text>
+          </TouchableOpacity>
+        </View>
         </View>
         
         )
