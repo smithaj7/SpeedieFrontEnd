@@ -165,6 +165,31 @@ export default class LandingPage extends React.Component {
     //   });
     // }
 
+    var btns;
+    if(this.props.navigation.state.params.role == "Associate"){
+      btns = <View style = {styles.btnView}>
+      <TouchableOpacity style={styles.menuButton} onPress={this.ordersPressHandler}>
+          <Text style={styles.buttonText}>Orders</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.menuButton} onPress={this._handleAccountPress}>
+          <Text style={styles.buttonText}>Account</Text>
+      </TouchableOpacity>
+      </View>
+    }
+    else{
+      btns = <View style = {styles.btnView}>
+      <TouchableOpacity style={styles.menuButton} onPress={this.ordersPressHandler}>
+          <Text style={styles.buttonText}>Orders</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.menuButton} onPress={this.inventoryPressHandler}>
+          <Text style={styles.buttonText}>Inventory</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.menuButton} onPress={this._handleAccountPress}>
+          <Text style={styles.buttonText}>Account</Text>
+      </TouchableOpacity>
+      </View>
+    }
+
     return (
       <SafeAreaView style={styles.container}>
         {/* <View style = {styles.banner}>
@@ -172,16 +197,7 @@ export default class LandingPage extends React.Component {
         </View> */}
     
         <Image style = {styles.logo} source={require("../../../Darker Green Logo.png")}></Image>
-        
-        <TouchableOpacity style={styles.menuButton} onPress={this.ordersPressHandler}>
-            <Text style={styles.buttonText}>Orders</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuButton} onPress={this.inventoryPressHandler}>
-            <Text style={styles.buttonText}>Inventory</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuButton} onPress={this._handleAccountPress}>
-            <Text style={styles.buttonText}>Account</Text>
-        </TouchableOpacity>
+        {btns}
         
         
       </SafeAreaView>
@@ -225,6 +241,14 @@ const styles = StyleSheet.create({
     
   },
 
+  btnView: {
+    position: "relative",
+    height: "55%",
+    width: "100%",
+    marginTop: "5%",
+
+  },
+
   menuButton: {
     position: "relative",
     alignSelf: "center",
@@ -232,8 +256,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#113B08",
     alignItems: "center",
     justifyContent: "center",
-    height: "12%",
-    width: "45%",
+    height: "25%",
+    width: "40%",
     borderRadius: 15,
   },
 
