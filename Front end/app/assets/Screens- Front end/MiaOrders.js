@@ -13,8 +13,7 @@ import {
   Linking,
 } from "react-native";
 import navigation from "react-navigation";
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
+import Dialog, {DialogTitle, DialogContent } from 'react-native-popup-dialog';
 
 
 //import {useRoute} from '@react-navigation/native'
@@ -203,15 +202,23 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={i % 2? { background : "#D3D3D3" }:{ background : "white" }} key={i}>
                     <DataTable.Cell style={{flex: .2}} >
-                        <Popup trigger={<button>+</button>} position="right center">
-                          <div> Customer: {val.names[i]}</div>
-                          <div> Phone Number: {val.phoneNumbers[i]}</div>
-                          <div> Location: {val.locations[i]}</div>
-                          <div> Address: {val.addresses[i]}</div>
-                          <div> Quarts: {val.quarts[i]}</div>
-                          <div> Half Gallons: {val.halfGals[i]}</div>
-                          <div> Delivery Date: {val.deliveryDates[i]}</div>
-                        </Popup>
+                        <Button
+                            title="+"
+                            onPress={() => { this.setState({ visible: true }); }}
+                          />
+                        <Dialog
+                          visible={this.state.visible}
+                          dialogTitle={<DialogTitle title="More Information" />}
+                          onTouchOutside={() => { this.setState({ visible: false });}} >
+                          <DialogContent>
+                            <div> Customer: {val.names[i]}</div>
+                            <div> Phone Number: {val.phoneNumbers[i]}</div>
+                            <div> Location: {val.locations[i]}</div>
+                            <div> Address: {val.addresses[i]}</div>
+                            <div> Quarts: {val.quarts[i]}</div>
+                            <div> HGs: {val.halfGals[i]}</div>
+                          </DialogContent>
+                        </Dialog>
                     </DataTable.Cell>
                     <DataTable.Cell style={{flex: .5}} >{val.deliveryDates[i]}</DataTable.Cell>
                     <DataTable.Cell style={{flex: 1}}
@@ -231,15 +238,23 @@ export default class MiaOrders extends React.Component {
                 return (
                   <DataTable.Row style={i % 2? { background : "#D3D3D3" }:{ background : "white" }} key={i}>
                     <DataTable.Cell style={{flex: .2}} >
-                        <Popup trigger={<button>+</button>} position="right center">
-                          <div> Customer: {val.names[i]}</div>
-                          <div> Phone Number: {val.phoneNumbers[i]}</div>
-                          <div> Location: {val.locations[i]}</div>
-                          <div> Address: {val.addresses[i]}</div>
-                          <div> Quarts: {val.quarts[i]}</div>
-                          <div> Half Gallons: {val.halfGals[i]}</div>
-                          <div> Delivery Date: {val.deliveryDates[i]}</div>
-                        </Popup>
+                        <Button
+                            title="+"
+                            onPress={() => { this.setState({ visible: true }); }}
+                          />
+                        <Dialog
+                          visible={this.state.visible}
+                          dialogTitle={<DialogTitle title="More Information" />}
+                          onTouchOutside={() => { this.setState({ visible: false });}} >
+                          <DialogContent>
+                            <div> Customer: {val.names[i]}</div>
+                            <div> Phone Number: {val.phoneNumbers[i]}</div>
+                            <div> Location: {val.locations[i]}</div>
+                            <div> Address: {val.addresses[i]}</div>
+                            <div> Quarts: {val.quarts[i]}</div>
+                            <div> HGs: {val.halfGals[i]}</div>
+                          </DialogContent>
+                        </Dialog>
                     </DataTable.Cell>
                     <DataTable.Cell style={{flex: .5}} >{val.deliveryDates[i]}</DataTable.Cell>
                     <DataTable.Cell style={{flex: 1}}
