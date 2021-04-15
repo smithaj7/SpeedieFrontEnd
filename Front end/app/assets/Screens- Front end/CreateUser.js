@@ -67,7 +67,7 @@ export default class CreateUser extends React.Component {
           alert("Please fill in all fields.")
       }
       else{
-        const result = await this.getData();
+        await this.getData();
         // // var li = this.state.dataSource.map((val, key) => {
         // //     return val.ResetStatus;
         // // });
@@ -75,7 +75,11 @@ export default class CreateUser extends React.Component {
         // //     alert("Invalid email");
         // // }
         // else{
-            this.props.navigation.navigate("AccountPage");
+        const { params } = this.props.navigation.state;
+        var email = params.user;
+        var loc = params.loc;
+        var employeeRole = params.role;
+        this.props.navigation.navigate("AccountInfo", {user: email, location: loc, role: employeeRole});
         // }
       }
   };
@@ -151,7 +155,7 @@ export default class CreateUser extends React.Component {
               }}
               dropDownStyle={{
               }}
-              onChangeItem={(item) => this.setState({role: item})}
+              onChangeItem={(item) => this.setState({role: item.value})}
             ></DropDownPicker>
         </View>
 
@@ -170,7 +174,7 @@ export default class CreateUser extends React.Component {
               dropDownStyle={{
                 // zIndex: 3
               }}
-              onChangeItem={(item) => this.setState({location: item})}
+              onChangeItem={(item) => this.setState({location: item.value})}
             ></DropDownPicker>
         </View>
 
