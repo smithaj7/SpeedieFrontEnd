@@ -16,16 +16,19 @@ export default class CreateUser extends React.Component {
     super(props);
     this.state = {
       email: "",
-      password: "",
-      confirmPassword: "",
+      temporaryPassword: "",
+      phoneNumber: "",
+      location: "",
+      role : "",
+      name: "",
       isLoading: true,
       dataSource: [],
       loggedIn: false,
     };
 
     this._handlePress = this._handlePress.bind(this);
-    this.setRole = this.setRole(this);
-    this.setLocation = this.setLocation(this);
+    // this.setRole = this.setRole(this);
+    // this.setLocation = this.setLocation(this);
   }
 
   componentDidMount() {
@@ -33,11 +36,15 @@ export default class CreateUser extends React.Component {
   }
 
   getData = async () => {
-    return await fetch("http://localhost:7071/api/ForgotPassword", {
+    return await fetch("http://localhost:7071/api/AddEmployee", {
       method: "POST",
       body: JSON.stringify({
         email: this.state.email,
-        password: this.state.password,
+        password: this.state.temporaryPassword,
+        phone: this.state.phoneNumber,
+        location: this.state.location,
+        role: this.state.role,
+        name: this.state.name
       }),
     })
       .then((response) => response.json())
@@ -54,31 +61,33 @@ export default class CreateUser extends React.Component {
   };
 
   _handlePress = async () => {
-      if (this.state.role == null || this.state.location == null || this.state.email == null || this.state.password == null){
+      if (this.state.role == null || this.state.location == null || 
+        this.state.email == null || this.state.temporaryPassword == null
+        || this.state.phoneNumber == null){
           alert("Please fill in all fields.")
       }
       else{
         const result = await this.getData();
-        var li = this.state.dataSource.map((val, key) => {
-            return val.ResetStatus;
-        });
-        if (li == "invalid email"){
-            alert("Invalid email");
-        }
-        else{
+        // // var li = this.state.dataSource.map((val, key) => {
+        // //     return val.ResetStatus;
+        // // });
+        // // if (li == "invalid email"){
+        // //     alert("Invalid email");
+        // // }
+        // else{
             this.props.navigation.navigate("AccountPage");
-        }
+        // }
       }
   };
 
-    setRole = async(item) => {
-        this.state.role = item;
-    };
+    // setRole = async(item) => {
+    //     this.state.role = item;
+    // };
 
 
-    setLocation = async(item) => {
-        this.state.location = item;
-    };
+    // setLocation = async(item) => {
+    //     this.state.location = item;
+    // };
 
   render() {
     return (
@@ -87,6 +96,15 @@ export default class CreateUser extends React.Component {
         <View style = {styles.banner}>
         </View>
         <Text style={styles.loginHeader}>Create New Employee</Text>
+        <View style={styles.NameInputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="Employee Full Name"
+            placeholderTextColor="#003f5c"
+            onChangeText={(text) => this.setState({ name: text })}
+            onSubmitEditing={this._handlePress}
+          />
+        </View>
         <View style={styles.EmailInputView}>
           <TextInput
             style={styles.inputText}
@@ -102,37 +120,38 @@ export default class CreateUser extends React.Component {
             style={styles.inputText}
             placeholder="Temporary Password"
             placeholderTextColor="#003f5c"
-            onChangeText={(text) => this.setState({ password: text })}
+            onChangeText={(text) => this.setState({ temporaryPassword: text })}
             onSubmitEditing={this._handlePress}
           />
         </View>
-{/* 
-        <View style={styles.ConfirmPasswordInputView}>
+
+        <View style={styles.phoneNumber}>
           <TextInput
-            secureTextEntry
             style={styles.inputText}
-            placeholder="Confirm Password"
+            placeholder="Phone Number"
             placeholderTextColor="#003f5c"
-            onChangeText={(text) => this.setState({ confirmPassword: text })}
+            onChangeText={(text) => this.setState({ phoneNumber: text })}
             onSubmitEditing={this._handlePress}
+            maxLength="10"
+            keyboardType="numeric"
           />
-        </View> */}
+        </View>
 
         <View style={styles.selectEmployee}>
             <DropDownPicker
               items={[
-                { label: "Administrator", value: "administrator" },
-                { label: "Delivery Driver", value: "associate" },
+                { label: "Administrator", value: "Administrator" },
+                { label: "Delivery Driver", value: "Associate" },
               ]}
               placeholder="Select an Employee Type"
               style={{ 
                 backgroundColor: "white", 
                 marginTop: "5%",
-                zIndex: 999
+                // zIndex: 999
               }}
               dropDownStyle={{
               }}
-              onChangeItem={(item) => {this.setRole(item)}}
+              onChangeItem={(item) => this.setState({role: item})}
             ></DropDownPicker>
         </View>
 
@@ -149,9 +168,9 @@ export default class CreateUser extends React.Component {
                 marginTop: "5%",
               }}
               dropDownStyle={{
-                zIndex: 3
+                // zIndex: 3
               }}
-              onChangeItem={(item) => {this.setLocation(item)}}
+              onChangeItem={(item) => this.setState({location: item})}
             ></DropDownPicker>
         </View>
 
@@ -189,6 +208,17 @@ const styles = StyleSheet.create({
     position: "relative",
     alignSelf: "center",
   },
+  NameInputView: {
+    width: "90%",
+    backgroundColor: "white",
+    borderWidth: 1.5,
+    borderColor: "black",
+    borderRadius: 15,
+    height: "8%",
+    marginTop: "5%",
+    alignSelf: "center",
+    padding: "5%",
+  },
   EmailInputView: {
     width: "90%",
     backgroundColor: "white",
@@ -212,7 +242,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     padding: "5%",
   },
-  ConfirmPasswordInputView: {
+  phoneNumber: {
     width: "90%",
     backgroundColor: "white",
     borderWidth: 1.5,

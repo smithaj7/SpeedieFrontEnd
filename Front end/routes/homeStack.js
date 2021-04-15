@@ -87,14 +87,13 @@ const screens = {
       header: null,
     }
   },
-  
+
   CreateUser: {
     screen: CreateUser,
     navigationOptions: {
       header: null,
     }
   },
-
 };
 
 const HomeStack = createStackNavigator(screens);
