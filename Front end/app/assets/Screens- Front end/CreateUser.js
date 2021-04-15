@@ -9,8 +9,9 @@ import {
 } from "react-native";
 
 import navigation from "react-navigation";
+import DropDownPicker from "react-native-dropdown-picker";
 
-export default class ForgotPassword extends React.Component {
+export default class CreateUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,39 +24,12 @@ export default class ForgotPassword extends React.Component {
     };
 
     this._handlePress = this._handlePress.bind(this);
-    //this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
+    this.setRole = this.setRole(this);
+    this.setLocation = this.setLocation(this);
   }
 
-  // this.state = {
-  //   email: "",
-  //   password: "",
-  // };
-
-  // pressHandler({ navigation }) {
-  //   navigation.push("Next");
-  // }
-
   componentDidMount() {
-    // return fetch("http://localhost:7071/api/Login", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     email: this.state.email,
-    //     password: this.state.password,
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((responseJson) => {
-    //     console.log(responseJson);
-    //     this.setState({
-    //       isLoading: false,
-    //       dataSource: [responseJson],
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
     this.getData();
-    //setInterval(this.getData, 30000);
   }
 
   getData = async () => {
@@ -80,76 +54,39 @@ export default class ForgotPassword extends React.Component {
   };
 
   _handlePress = async () => {
-      if (this.state.password != this.state.confirmPassword){
-        alert("Passwords do not match");
+      if (this.state.role == null || this.state.location == null || this.state.email == null || this.state.password == null){
+          alert("Please fill in all fields.")
       }
       else{
         const result = await this.getData();
-    //var li
         var li = this.state.dataSource.map((val, key) => {
-        return val.ResetStatus;
-    });
+            return val.ResetStatus;
+        });
         if (li == "invalid email"){
             alert("Invalid email");
         }
         else{
-            this.props.navigation.navigate("Login");
+            this.props.navigation.navigate("AccountPage");
         }
       }
-    
-    // //var li
-    // var li = this.state.dataSource.map((val, key) => {
-    //   return val.LoggedIn;
-    // });
-
-    // var location = this.state.dataSource.map((val, key) => {
-    //   return val.Location;
-    // });
-
-    // console.log(li[0]);
-    // console.log(this.state.email);
-    // console.log(this.state.password);
-
-    // if (li[0] == "Yes") {
-    //   console.log("hey");
-    //   this.setState(
-    //     {
-    //       loggedIn: true,
-    //     },
-    //     () => console.log(this.state.loggedIn)
-    //   );
-    //   if (location == "All") {
-    //     this.props.navigation.navigate("AllOrders");
-    //   } else if (location == "Miami") {
-    //     var userName = this.state.email;
-    //     this.props.navigation.navigate("MiaOrders", { user: userName });
-    //   } else if (location == "New Orleans") {
-    //     this.props.navigation.navigate("NolaOrders");
-    //   } else if (location == "Chicago") {
-    //     this.props.navigation.navigate("ChiOrders");
-    //   }
-    // } else {
-    //   alert("Invalid username or password");
-    // }
   };
 
-  render() {
-    // var li = [];
-    // li = this.state.dataSource.map((val, key) => {
-    //   return val.LoggedIn[0];
-    // });
-    // if (li) {
-    //   this.setState({
-    //     loggedIn: true,
-    //   });
-    // }
+    setRole = async(item) => {
+        this.state.role = item;
+    };
 
+
+    setLocation = async(item) => {
+        this.state.location = item;
+    };
+
+  render() {
     return (
       <View style={styles.container}>
         <Image style = {styles.logo} source={require("../../../SpeediePNG.png")}></Image>
         <View style = {styles.banner}>
         </View>
-        <Text style={styles.loginHeader}>Reset Password</Text>
+        <Text style={styles.loginHeader}>Create New Employee</Text>
         <View style={styles.EmailInputView}>
           <TextInput
             style={styles.inputText}
@@ -163,13 +100,13 @@ export default class ForgotPassword extends React.Component {
           <TextInput
             secureTextEntry
             style={styles.inputText}
-            placeholder="New Password"
+            placeholder="Temporary Password"
             placeholderTextColor="#003f5c"
             onChangeText={(text) => this.setState({ password: text })}
             onSubmitEditing={this._handlePress}
           />
         </View>
-
+{/* 
         <View style={styles.ConfirmPasswordInputView}>
           <TextInput
             secureTextEntry
@@ -179,10 +116,47 @@ export default class ForgotPassword extends React.Component {
             onChangeText={(text) => this.setState({ confirmPassword: text })}
             onSubmitEditing={this._handlePress}
           />
+        </View> */}
+
+        <View style={styles.selectEmployee}>
+            <DropDownPicker
+              items={[
+                { label: "Administrator", value: "administrator" },
+                { label: "Delivery Driver", value: "associate" },
+              ]}
+              placeholder="Select an Employee Type"
+              style={{ 
+                backgroundColor: "white", 
+                marginTop: "5%",
+                zIndex: 999
+              }}
+              dropDownStyle={{
+              }}
+              onChangeItem={(item) => {this.setRole(item)}}
+            ></DropDownPicker>
         </View>
 
-        <TouchableOpacity style={styles.resetBtn} onPress={this._handlePress}>
-          <Text style={styles.resetText}>Reset</Text>
+        <View style={styles.selectLocation}>
+            <DropDownPicker
+              items={[
+                { label: "Miami", value: "Miami" },
+                { label: "New Orleans", value: "New Orleans" },
+                { label: "Chicago", value: "Chicago" },
+              ]}
+              placeholder="Select a Location"
+              style={{ 
+                backgroundColor: "white", 
+                marginTop: "5%",
+              }}
+              dropDownStyle={{
+                zIndex: 3
+              }}
+              onChangeItem={(item) => {this.setLocation(item)}}
+            ></DropDownPicker>
+        </View>
+
+        <TouchableOpacity style={styles.createBtn} onPress={this._handlePress}>
+          <Text style={styles.createText}>Create Employee</Text>
         </TouchableOpacity>
       </View>
     );
@@ -194,9 +168,9 @@ const styles = StyleSheet.create({
   //   flex: 1,
   // },
   container: {
+    flex: 1,
     backgroundColor: "#FFFFFF",
     alignItems: "flex-start",
-    // justifyContent: "center",
     width: "100%",
     height: "100%",
   },
@@ -207,23 +181,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginTop: "10%"
   },
-  // banner:{
-  //   width: "90%",
-  //   height: "13%",
-  //   //flex: 1,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   alignSelf: "center",
-  //   backgroundColor: "#113B08",
-
-  // },
-  // bannerText:{
-  //   fontSize: 26,
-  //   fontWeight: "bold",
-  //   color: "white",
-  //   //alignSelf: "center",
-  //   //alignItems: "center",
-  // },
+  
   loginHeader: {
     fontSize: 20,
     fontWeight: "bold",
@@ -272,17 +230,24 @@ const styles = StyleSheet.create({
     width: "85%",
     color: "black",
   },
-  resetBtn: {
-    width: "35%%",
+  selectEmployee: {
+    alignSelf: "center",
+    minHeight: "100px",
+  },
+  selectLocation: {
+    alignSelf: "center",
+  },
+  createBtn: {
+    width: "40%%",
     backgroundColor: "#113B08",
     borderRadius: 10,
     height: "6%",
     alignSelf: "center",
     position: "relative",
-    marginTop: "5%",
+    marginTop: "15%",
     marginBottom: "2%",
   },
-  resetText: {
+  createText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",

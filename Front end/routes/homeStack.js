@@ -13,6 +13,7 @@ import MiaOrders from "../app/assets/Screens- Front end/MiaOrders";
 import NolaOrders from "../app/assets/Screens- Front end/NolaOrders";
 import ChiOrders from "../app/assets/Screens- Front end/ChiOrders";
 import AccountInfo from "../app/assets/Screens- Front end/AccountInfo"
+import CreateUser from "../app/assets/Screens- Front end/CreateUser"
 
 const screens = {
 
@@ -23,7 +24,6 @@ const screens = {
     }
     
   },
-
   LandingPage: {
     screen: LandingPage,
     navigationOptions: {
@@ -31,8 +31,6 @@ const screens = {
     }
     
   },
-
-
   ForgotPassword: {
     screen: ForgotPassword,
     navigationOptions: {
@@ -90,6 +88,13 @@ const screens = {
     }
   },
   
+  CreateUser: {
+    screen: CreateUser,
+    navigationOptions: {
+      header: null,
+    }
+  },
+
 };
 
 const HomeStack = createStackNavigator(screens);
