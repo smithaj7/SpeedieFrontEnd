@@ -31,9 +31,9 @@ export default class CreateUser extends React.Component {
     // this.setLocation = this.setLocation(this);
   }
 
-  componentDidMount() {
-    this.getData();
-  }
+  // componentDidMount() {
+  //   this.getData();
+  // }
 
   getData = async () => {
     return await fetch("http://localhost:7071/api/AddEmployee", {
@@ -61,9 +61,9 @@ export default class CreateUser extends React.Component {
   };
 
   _handlePress = async () => {
-      if (this.state.role == null || this.state.location == null || 
-        this.state.email == null || this.state.temporaryPassword == null
-        || this.state.phoneNumber == null){
+      if (this.state.role == "" || this.state.location == "" || 
+        this.state.email == "" || this.state.temporaryPassword == ""
+        || this.state.phoneNumber == ""){
           alert("Please fill in all fields.")
       }
       else{
@@ -76,7 +76,7 @@ export default class CreateUser extends React.Component {
         // // }
         // else{
         const { params } = this.props.navigation.state;
-        var email = params.user;
+        var email = params.email;
         var loc = params.loc;
         var employeeRole = params.role;
         this.props.navigation.navigate("AccountInfo", {user: email, location: loc, role: employeeRole});
