@@ -69,6 +69,7 @@ module.exports = async function (context, req) {
       }
       
     }
+    console.log(addresses);
     
   } catch (err) {
     console.log(err);

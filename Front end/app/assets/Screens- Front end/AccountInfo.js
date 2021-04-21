@@ -185,9 +185,6 @@ export default class WelcomeScreen extends React.Component {
     var ordersTaken = this.state.dataSource.map((val, key) => {
          return val.OrdersTaken;
        });
-    var bottlesReturned = this.state.dataSource.map((val, key) => {
-        return val.BottlesReturned;
-      });
 
     
     var location = this.state.dataSource.map((val, key) => {
@@ -257,7 +254,7 @@ export default class WelcomeScreen extends React.Component {
             <Text style={styles.textStyle}>Email address: {this.props.navigation.state.params.user}</Text>
         </View>
         <View style={styles.PasswordView}>
-            <Text style={styles.textStyle}>Password: *</Text>
+            <Text style={styles.textStyle}>Password: ***********</Text>
         </View>
         <View style={styles.BottlesView}>
             <TouchableOpacity style={styles.changePasswordBtn}>
@@ -270,9 +267,6 @@ export default class WelcomeScreen extends React.Component {
         <Text style = {styles.viewHeader}>Performance</Text>
         <View style={styles.BottlesView}>
             <Text style={styles.textStyle}>Number of deliveries: {ordersTaken}</Text>
-        </View>
-        <View style={styles.BottlesView}>
-            <Text style={styles.textStyle}>Bottles Returned: {bottlesReturned}</Text>
         </View>
         </View>
         {menu}
@@ -349,7 +343,7 @@ const styles = StyleSheet.create({
 
   performanceView : {
     marginTop: "4%",
-    flex: 2,
+    flex: 1.5,
     width: "90%",
     borderColor: "gray",
     borderWidth: 2,
@@ -363,7 +357,7 @@ const styles = StyleSheet.create({
       //backgroundColor: "yellow"
   },
   BottlesView: {
-    flex: 1,
+    flex: 2,
     width: "100%",
     //height: "10%",
     alignSelf: "flex-start",
@@ -426,8 +420,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     marginTop: "3%",
-    //height: "18%",
-    flex: 1.5,
+    height: "10%",
     width: "100%",
     backgroundColor: "#093b15"
   },
