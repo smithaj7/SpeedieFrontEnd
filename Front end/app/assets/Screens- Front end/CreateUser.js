@@ -31,9 +31,9 @@ export default class CreateUser extends React.Component {
     // this.setLocation = this.setLocation(this);
   }
 
-  componentDidMount() {
-    this.getData();
-  }
+  // componentDidMount() {
+  //   this.getData();
+  // }
 
   getData = async () => {
     return await fetch("http://localhost:7071/api/AddEmployee", {
@@ -61,9 +61,9 @@ export default class CreateUser extends React.Component {
   };
 
   _handlePress = async () => {
-      if (this.state.role == null || this.state.location == null || 
-        this.state.email == null || this.state.temporaryPassword == null
-        || this.state.phoneNumber == null){
+      if (this.state.role == "" || this.state.location == "" || 
+        this.state.email == "" || this.state.temporaryPassword == ""
+        || this.state.phoneNumber == ""){
           alert("Please fill in all fields.")
       }
       else{
@@ -76,7 +76,7 @@ export default class CreateUser extends React.Component {
         // // }
         // else{
         const { params } = this.props.navigation.state;
-        var email = params.user;
+        var email = params.email;
         var loc = params.loc;
         var employeeRole = params.role;
         this.props.navigation.navigate("AccountInfo", {user: email, location: loc, role: employeeRole});
@@ -141,38 +141,33 @@ export default class CreateUser extends React.Component {
           />
         </View>
 
-        <View style={styles.selectEmployee}>
+        <View style={styles.dropDownPicker}>
             <DropDownPicker
               items={[
                 { label: "Administrator", value: "Administrator" },
                 { label: "Delivery Driver", value: "Associate" },
               ]}
-              placeholder="Select an Employee Type"
+              placeholder="Employee Type"
               style={{ 
                 backgroundColor: "white", 
-                marginTop: "5%",
-                // zIndex: 999
+                margin: "10px",
               }}
               dropDownStyle={{
               }}
               onChangeItem={(item) => this.setState({role: item.value})}
             ></DropDownPicker>
-        </View>
-
-        <View style={styles.selectLocation}>
             <DropDownPicker
               items={[
                 { label: "Miami", value: "Miami" },
                 { label: "New Orleans", value: "New Orleans" },
                 { label: "Chicago", value: "Chicago" },
               ]}
-              placeholder="Select a Location"
+              placeholder="Location"
               style={{ 
                 backgroundColor: "white", 
-                marginTop: "5%",
+                margin: "10px",
               }}
               dropDownStyle={{
-                // zIndex: 3
               }}
               onChangeItem={(item) => this.setState({location: item.value})}
             ></DropDownPicker>
@@ -221,7 +216,7 @@ const styles = StyleSheet.create({
     height: "8%",
     marginTop: "5%",
     alignSelf: "center",
-    padding: "5%",
+    padding: "10px",
   },
   EmailInputView: {
     width: "90%",
@@ -230,9 +225,9 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderRadius: 15,
     height: "8%",
-    marginTop: "5%",
+    marginTop: "4%",
     alignSelf: "center",
-    padding: "5%",
+    padding: "10px",
   },
   PasswordInputView: {
     width: "90%",
@@ -244,7 +239,7 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     position: "relative",
     alignSelf: "center",
-    padding: "5%",
+    padding: "10px",
   },
   phoneNumber: {
     width: "90%",
@@ -256,20 +251,18 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     position: "relative",
     alignSelf: "center",
-    padding: "5%",
+    padding: "10px",
   },
   inputText: {
-    height: "90%",
+    height: "100%",
     fontSize: 18,
     width: "85%",
     color: "black",
   },
-  selectEmployee: {
+  dropDownPicker: {
     alignSelf: "center",
-    minHeight: "100px",
-  },
-  selectLocation: {
-    alignSelf: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   createBtn: {
     width: "40%%",
@@ -278,7 +271,7 @@ const styles = StyleSheet.create({
     height: "6%",
     alignSelf: "center",
     position: "relative",
-    marginTop: "15%",
+    marginTop: "18%",
     marginBottom: "2%",
   },
   createText: {

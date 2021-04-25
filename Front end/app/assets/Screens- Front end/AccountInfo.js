@@ -27,6 +27,7 @@ export default class WelcomeScreen extends React.Component {
     this.changePasswordPress = this.changePasswordPress.bind(this);
     this.inventoryPressHandler = this.inventoryPressHandler.bind(this);
     this._handleAccountPress = this._handleAccountPress.bind(this);
+    this.addEmployeePressHandler = this.addEmployeePressHandler.bind(this);
     //this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
 
@@ -109,6 +110,14 @@ export default class WelcomeScreen extends React.Component {
     this.props.navigation.navigate("ForgotPassword")
   }
 
+  addEmployeePressHandler() {
+    const { params } = this.props.navigation.state;
+    var email = params.user;
+    var loc = params.location;
+    var employeeRole = params.role;
+    this.props.navigation.navigate("CreateUser", {user: email, location: loc, role: employeeRole})
+  }
+
   _handlePress = async () => {
       if (this.state.password != this.state.confirmPassword){
         alert("Passwords do not match");
@@ -174,14 +183,38 @@ export default class WelcomeScreen extends React.Component {
     var ordersTaken = this.state.dataSource.map((val, key) => {
          return val.OrdersTaken;
        });
-    var bottlesReturned = this.state.dataSource.map((val, key) => {
-        return val.BottlesReturned;
-      });
 
     
     var location = this.state.dataSource.map((val, key) => {
         return val.Location;
       });
+
+      var employee;
+      if (this.props.navigation.state.params.role == "Associate"){
+        employee = <View style={styles.performanceView}>
+          <Text style = {styles.viewHeader}>Employee Info</Text>
+        <View style={styles.BottlesView}>
+            <Text style={styles.textStyle}>Location: {this.props.navigation.state.params.location}</Text>
+        </View>
+        <View style={styles.BottlesView}>
+            <Text style={styles.textStyle}>Role: {this.props.navigation.state.params.role}</Text>
+        </View>
+        </View>
+      }
+      else{
+        employee = <View style={styles.performanceView}>
+        <Text style = {styles.viewHeader}>Employee Info</Text>
+      <View style={styles.BottlesView}>
+          <Text style={styles.textStyle}>Location: {this.props.navigation.state.params.location}</Text>
+      </View>
+      <View style={styles.BottlesView}>
+          <Text style={styles.textStyle}>Role: {this.props.navigation.state.params.role}</Text>
+      </View>
+      <TouchableOpacity style={styles.addEmployeeButton} onPress={this.addEmployeePressHandler}>
+          <Text style={styles.addEmployeeText}>Add Employee</Text>
+        </TouchableOpacity>
+      </View>
+      }
 
       var menu;
       if (this.props.navigation.state.params.role == "Associate"){
@@ -219,31 +252,19 @@ export default class WelcomeScreen extends React.Component {
             <Text style={styles.textStyle}>Email address: {this.props.navigation.state.params.user}</Text>
         </View>
         <View style={styles.PasswordView}>
-            <Text style={styles.textStyle}>Password: {pword}</Text>
+            <Text style={styles.textStyle}>Password: ***********</Text>
         </View>
         <View style={styles.BottlesView}>
             <TouchableOpacity style={styles.changePasswordBtn}>
                 <Text style={{fontSize: 15, color: "blue"}} onPress={this.changePasswordPress}>Change Password?</Text>
             </TouchableOpacity>
-            
         </View>
         </View>
-        <View style={styles.performanceView}>
-          <Text style = {styles.viewHeader}>Employee Info</Text>
-        <View style={styles.BottlesView}>
-            <Text style={styles.textStyle}>Location: {this.props.navigation.state.params.location}</Text>
-        </View>
-        <View style={styles.BottlesView}>
-            <Text style={styles.textStyle}>Role: {this.props.navigation.state.params.role}</Text>
-        </View>
-        </View>
+        {employee}
         <View style={styles.performanceView}>
         <Text style = {styles.viewHeader}>Performance</Text>
         <View style={styles.BottlesView}>
             <Text style={styles.textStyle}>Number of deliveries: {ordersTaken}</Text>
-        </View>
-        <View style={styles.BottlesView}>
-            <Text style={styles.textStyle}>Bottles Returned: {bottlesReturned}</Text>
         </View>
         </View>
         {menu}
@@ -320,7 +341,7 @@ const styles = StyleSheet.create({
 
   performanceView : {
     marginTop: "4%",
-    flex: 2,
+    flex: 1.5,
     width: "90%",
     borderColor: "gray",
     borderWidth: 2,
@@ -334,7 +355,7 @@ const styles = StyleSheet.create({
       //backgroundColor: "yellow"
   },
   BottlesView: {
-    flex: 1,
+    flex: 2,
     width: "100%",
     //height: "10%",
     alignSelf: "flex-start",
@@ -397,8 +418,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     marginTop: "3%",
+<<<<<<< HEAD
     //height: "18%",
     flex: 1.2,
+=======
+    height: "10%",
+>>>>>>> 2841eae6dd8d68e9f68cc616dec948fcb27393b8
     width: "100%",
     backgroundColor: "#093b15"
   },
@@ -441,5 +466,26 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     color: "white"
+  },
+  addEmployeeButton: {
+    width: "35%",
+    backgroundColor: "#113B08",
+    borderRadius: 10,
+    height: "20px",
+    //left: 20,
+    //alignItems: "center",
+    //justifyContent: "center",
+    alignSelf: "center",
+    position: "relative",
+    // marginTop: "8%",
+    marginBottom: "10px",
+  },
+  addEmployeeText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    position: "relative",
+    //top: "35%",
   }
 });
