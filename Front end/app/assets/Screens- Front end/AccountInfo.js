@@ -164,15 +164,13 @@ export default class WelcomeScreen extends React.Component {
   };
 
   render() {
-    // var li = [];
-    // li = this.state.dataSource.map((val, key) => {
-    //   return val.LoggedIn[0];
-    // });
-    // if (li) {
-    //   this.setState({
-    //     loggedIn: true,
-    //   });
-    // }
+    const { params } = this.props.navigation.state;
+    var passwordLength = params.pLength;
+    var pword = "";
+    for (let i =0; i < passwordLength;i++){
+      pword += "*";
+    }
+
     var ordersTaken = this.state.dataSource.map((val, key) => {
          return val.OrdersTaken;
        });
@@ -221,7 +219,7 @@ export default class WelcomeScreen extends React.Component {
             <Text style={styles.textStyle}>Email address: {this.props.navigation.state.params.user}</Text>
         </View>
         <View style={styles.PasswordView}>
-            <Text style={styles.textStyle}>Password: *</Text>
+            <Text style={styles.textStyle}>Password: {pword}</Text>
         </View>
         <View style={styles.BottlesView}>
             <TouchableOpacity style={styles.changePasswordBtn}>
@@ -400,7 +398,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: "3%",
     //height: "18%",
-    flex: 1.5,
+    flex: 1.2,
     width: "100%",
     backgroundColor: "#093b15"
   },
