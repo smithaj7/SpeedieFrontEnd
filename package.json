@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
+    "az": "^0.2.3",
     "cors": "^2.8.5",
     "date-and-time": "^0.14.1",
     "expo": "~38.0.8",
