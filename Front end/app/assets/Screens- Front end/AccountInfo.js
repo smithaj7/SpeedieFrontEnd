@@ -418,12 +418,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     marginTop: "3%",
-<<<<<<< HEAD
-    //height: "18%",
-    flex: 1.2,
-=======
     height: "10%",
->>>>>>> 2841eae6dd8d68e9f68cc616dec948fcb27393b8
     width: "100%",
     backgroundColor: "#093b15"
   },
